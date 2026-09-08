@@ -1,15 +1,17 @@
 # Folha Clara
 
-Sistema de folha de pagamento com interface web em português e persistência em arquivo JSON, sem banco de dados e sem dependências externas. Requer Node.js 22 ou superior.
+Projeto React para o sistema de folha de pagamento.
 
-## Executar
+## Desenvolvimento
 
 ```sh
-npm start
+npm run dev
 ```
 
-Acesse **http://localhost:3000**. Não é necessário instalar pacotes, configurar banco ou executar seed. O sistema inicia vazio; o diretório `data` e o arquivo `data/colaboradores.json` são criados no primeiro cadastro. Os registros continuam disponíveis após reiniciar o servidor.
+Abra o endereço exibido pelo Vite no terminal.
 
-Para desenvolvimento: `npm run dev`. Para testes: `npm test`.
+As dependências deste projeto devem ser instaladas usando o registry alternativo:
 
-Porta alternativa: `PORT=3001 npm start`. Arquivo alternativo: `DATA_FILE=/caminho/colaboradores.json npm start`.
+```sh
+npm install --registry=https://registry.npmmirror.com
+```

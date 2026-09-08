@@ -1,0 +1,96 @@
+:root {
+  font-family: Inter, "Segoe UI", Arial, sans-serif;
+  color: #202f30;
+  background: #f5f6f8;
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  --green: #155846;
+  --green-soft: #eaf3ef;
+  --ink: #202f30;
+  --muted: #697778;
+  --line: #e4e9e7;
+  --surface: #ffffff;
+}
+
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body { margin: 0; min-width: 320px; min-height: 100vh; }
+a { color: inherit; text-decoration: none; }
+a:focus-visible { outline: 3px solid #77aa94; outline-offset: 3px; }
+
+.app-shell { min-height: 100vh; }
+.sidebar {
+  position: fixed;
+  inset: 0 auto 0 0;
+  width: 244px;
+  display: flex;
+  flex-direction: column;
+  padding: 32px 22px;
+  background: var(--surface);
+  border-right: 1px solid var(--line);
+}
+
+.brand { display: flex; align-items: center; gap: 10px; font-size: 23px; letter-spacing: -1px; }
+.brand strong { font-weight: 400; }
+.brand-mark {
+  display: grid;
+  width: 36px;
+  height: 36px;
+  place-items: center;
+  border-radius: 10px;
+  background: var(--green);
+  color: white;
+  font: 30px Georgia, serif;
+}
+
+nav { margin-top: 64px; }
+nav > p, .card-label, .eyebrow { margin: 0; color: var(--muted); font-size: 9px; font-weight: 700; letter-spacing: 1.6px; }
+.nav-item { display: block; margin: 7px 0; padding: 13px; border-radius: 7px; color: var(--muted); font-size: 12px; font-weight: 600; }
+.nav-item:hover, .nav-item.active { background: var(--green-soft); color: var(--green); }
+
+.sidebar-note { margin-top: auto; color: var(--muted); font-size: 12px; line-height: 1.7; }
+.sidebar-note > span { display: block; width: 7px; height: 7px; border-radius: 50%; background: #569276; }
+.sidebar-note strong { color: var(--ink); font-weight: 600; }
+
+.page { min-height: 100vh; margin-left: 244px; }
+.topbar { height: 76px; display: flex; align-items: center; justify-content: space-between; padding: 0 42px; border-bottom: 1px solid var(--line); color: var(--muted); font-size: 11px; }
+.topbar i { margin: 0 14px; color: #b8c0be; font-style: normal; }
+.topbar strong { color: var(--ink); }
+.topbar small { letter-spacing: 1.4px; font-size: 9px; }
+
+main { max-width: 1100px; padding: 72px 42px; }
+.eyebrow { color: var(--green); }
+h1 { max-width: 720px; margin: 14px 0; font-size: clamp(38px, 6vw, 68px); font-weight: 600; line-height: .98; letter-spacing: -3px; }
+.subtitle { max-width: 620px; margin: 0; color: var(--muted); font-size: 15px; line-height: 1.7; }
+
+.status-card, .next-step { margin-top: 52px; border: 1px solid var(--line); border-radius: 14px; background: var(--surface); }
+.status-card { display: flex; align-items: center; justify-content: space-between; gap: 24px; padding: 26px; }
+.status-card > div { display: flex; align-items: center; gap: 20px; }
+.status-icon { display: grid; width: 46px; height: 46px; flex: none; place-items: center; border-radius: 50%; background: var(--green); color: white; font-size: 20px; }
+.status-card h2, .next-step h2 { margin: 8px 0; font-size: 20px; letter-spacing: -.5px; }
+.status-card p:last-child, .next-step > p:last-child { margin: 0; color: var(--muted); font-size: 12px; line-height: 1.6; }
+.status-badge { border-radius: 5px; padding: 7px 10px; background: var(--green-soft); color: var(--green); font-size: 9px; font-weight: 700; letter-spacing: 1px; }
+.next-step { padding: 26px; border-left: 4px solid var(--green); }
+
+@media (max-width: 720px) {
+  .sidebar { position: static; width: auto; padding: 20px; border-right: 0; border-bottom: 1px solid var(--line); }
+  .sidebar nav { display: flex; gap: 6px; margin-top: 24px; overflow-x: auto; }
+  nav > p, .sidebar-note { display: none; }
+  .nav-item { flex: none; }
+  .page { margin-left: 0; }
+  .topbar { height: 58px; padding: 0 20px; }
+  .topbar small { display: none; }
+  main { padding: 48px 20px; }
+  h1 { letter-spacing: -2px; }
+  .status-card { align-items: flex-start; }
+  .status-card > div { align-items: flex-start; }
+}
+
+@media (max-width: 480px) {
+  .status-card { flex-direction: column; }
+  .status-icon { width: 38px; height: 38px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+}
