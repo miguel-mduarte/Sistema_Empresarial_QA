@@ -1,30 +1,19 @@
 import { useState } from "react";
+import CompensationFields from "../components/employees/CompensationFields";
+import {
+  nomesTiposColaborador,
+  tiposColaborador,
+} from "../data/tiposColaborador";
 import { cadastrarColaborador } from "../services/colaboradoresApi";
+import {
+  buildEmployeePayload,
+  initialEmployeeForm,
+  validateEmployeeForm,
+} from "../utils/colaboradorForm";
 import { formatarMoeda } from "../utils/formatters";
 
-const initialForm = {
-  matricula: "",
-  nome: "",
-  salarioBase: "",
-  tipo: "Padrão",
-};
-
-function validate(form) {
-  const errors = {};
-  const salary = Number(form.salarioBase);
-
-  if (!form.matricula.trim()) errors.matricula = "Informe a matrícula.";
-  if (!form.nome.trim()) errors.nome = "Informe o nome do colaborador.";
-  if (form.salarioBase === "") errors.salarioBase = "Informe o salário base.";
-  else if (!Number.isFinite(salary) || salary < 0) {
-    errors.salarioBase = "O salário base deve ser igual ou maior que zero.";
-  }
-
-  return errors;
-}
-
 function EmployeesPage() {
-  const [form, setForm] = useState(initialForm);
+  const [form, setForm] = useState(initialEmployeeForm);
   const [errors, setErrors] = useState({});
   const [savedEmployee, setSavedEmployee] = useState(null);
   const [submitError, setSubmitError] = useState("");
@@ -33,13 +22,15 @@ function EmployeesPage() {
   function handleChange(event) {
     const { name, value } = event.target;
     setForm((current) => ({ ...current, [name]: value }));
-    setErrors((current) => ({ ...current, [name]: undefined }));
+    setErrors((current) => (
+      name === "tipo" ? {} : { ...current, [name]: undefined }
+    ));
     setSubmitError("");
   }
 
   async function handleSubmit(event) {
     event.preventDefault();
-    const validationErrors = validate(form);
+    const validationErrors = validateEmployeeForm(form);
 
     if (Object.keys(validationErrors).length > 0) {
       setErrors(validationErrors);
@@ -50,15 +41,10 @@ function EmployeesPage() {
     setIsSubmitting(true);
 
     try {
-      const employee = await cadastrarColaborador({
-        matricula: form.matricula.trim(),
-        nome: form.nome.trim(),
-        salarioBase: Number(form.salarioBase),
-        tipo: form.tipo,
-      });
+      const employee = await cadastrarColaborador(buildEmployeePayload(form));
 
       setSavedEmployee(employee);
-      setForm(initialForm);
+      setForm(initialEmployeeForm);
       setErrors({});
     } catch (error) {
       setSavedEmployee(null);
@@ -72,6 +58,8 @@ function EmployeesPage() {
     }
   }
 
+  const selectedType = tiposColaborador[form.tipo];
+
   return (
     <main id="colaboradores">
       <section
@@ -82,13 +70,15 @@ function EmployeesPage() {
           <p className="eyebrow">GESTÃO DA EQUIPE</p>
           <h1 id="employees-title">Novo colaborador</h1>
           <p className="subtitle">
-            Cadastre colaboradores do tipo padrão para manter as informações
-            essenciais da folha organizadas.
+            Cadastre colaboradores padrão, comissionados ou por produção com
+            os dados necessários para calcular cada remuneração.
           </p>
         </div>
         <div className="requirement-chip" aria-label="Requisitos contemplados">
           <span>RF001</span>
           <span>RF002</span>
+          <span>RF003</span>
+          <span>RF004</span>
         </div>
       </section>
 
@@ -184,10 +174,18 @@ function EmployeesPage() {
                 value={form.tipo}
                 onChange={handleChange}
               >
-                <option value="Padrão">Padrão</option>
+                {nomesTiposColaborador.map((tipo) => (
+                  <option key={tipo} value={tipo}>{tipo}</option>
+                ))}
               </select>
-              <small>Recebe somente o salário base.</small>
+              <small>{selectedType.descricao}</small>
             </div>
+
+            <CompensationFields
+              errors={errors}
+              form={form}
+              onChange={handleChange}
+            />
           </div>
 
           <div className="form-actions">
@@ -215,16 +213,13 @@ function EmployeesPage() {
         </form>
 
         <aside className="employee-summary" aria-label="Resumo do cadastro">
-          <p className="card-label">COLABORADOR PADRÃO</p>
-          <h2>Uma remuneração simples e direta.</h2>
-          <p>
-            Para esta categoria, o salário final será exatamente igual ao
-            salário base informado no cadastro.
-          </p>
+          <p className="card-label">COLABORADOR {form.tipo.toUpperCase()}</p>
+          <h2>{selectedType.titulo}</h2>
+          <p>{selectedType.descricao}</p>
 
           <div className="salary-rule">
             <span>Salário final</span>
-            <strong>= Salário base</strong>
+            <strong>= {selectedType.formula}</strong>
           </div>
 
           {savedEmployee ? (
@@ -233,7 +228,7 @@ function EmployeesPage() {
               <strong>{savedEmployee.nome}</strong>
               <p>
                 {savedEmployee.matricula} ·{" "}
-                {formatarMoeda(savedEmployee.salarioBase)}
+                {formatarMoeda(savedEmployee.salarioFinal)}
               </p>
             </div>
           ) : (
