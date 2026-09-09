@@ -1,45 +1,82 @@
 const Colaborador = require("../models/colaboradorModel");
+const ColaboradorRepository = require("../repositories/colaboradorRepository");
 
-class ColaboradorService {
-constructor() {
-this.colaboradores = [];
+class ErroDeNegocio extends Error {
+  constructor(message, statusCode = 400) {
+    super(message);
+    this.statusCode = statusCode;
+  }
 }
 
-cadastrar(matricula, nome, salarioBase, tipoColaborador) {
-    if (!matricula || !nome || !salarioBase || !tipoColaborador) {
-        throw new Error("Todos os campos são obrigatórios.");
+class ColaboradorService {
+  constructor(repository = new ColaboradorRepository()) {
+    this.repository = repository;
+  }
+
+  cadastrar({ matricula, nome, salarioBase, tipo }) {
+    const matriculaNormalizada = typeof matricula === "string"
+      ? matricula.trim()
+      : "";
+    const nomeNormalizado = typeof nome === "string" ? nome.trim() : "";
+    const salarioNormalizado = Number(salarioBase);
+
+    if (
+      !matriculaNormalizada
+      || !nomeNormalizado
+      || salarioBase === ""
+      || salarioBase == null
+      || !tipo
+    ) {
+      throw new ErroDeNegocio("Todos os campos são obrigatórios.");
     }
 
-    const colaboradorExistente = this.colaboradores.find(
-        colaborador => colaborador.matricula === matricula
+    if (!Number.isFinite(salarioNormalizado) || salarioNormalizado < 0) {
+      throw new ErroDeNegocio(
+        "O salário base deve ser um número igual ou maior que zero.",
+      );
+    }
+
+    if (tipo !== "Padrão") {
+      throw new ErroDeNegocio(
+        "RF002 permite apenas colaboradores do tipo Padrão.",
+      );
+    }
+
+    const colaboradorExistente = this.repository.listar().find(
+      (colaborador) => colaborador.matricula.localeCompare(
+        matriculaNormalizada,
+        "pt-BR",
+        { sensitivity: "accent" },
+      ) === 0,
     );
 
     if (colaboradorExistente) {
-        throw new Error("A matrícula já está cadastrada.");
+      throw new ErroDeNegocio("A matrícula já está cadastrada.", 409);
     }
 
-    const colaborador = new Colaborador(
+    const colaborador = new Colaborador({
+      matricula: matriculaNormalizada,
+      nome: nomeNormalizado,
+      salarioBase: salarioNormalizado,
+      tipo,
+    });
+
+    return this.repository.adicionar(colaborador);
+  }
+
+  listar() {
+    return this.repository.listar();
+  }
+
+  buscarPorMatricula(matricula) {
+    return this.repository.listar().find(
+      (colaborador) => colaborador.matricula.localeCompare(
         matricula,
-        nome,
-        salarioBase,
-        tipoColaborador
+        "pt-BR",
+        { sensitivity: "accent" },
+      ) === 0,
     );
-
-    this.colaboradores.push(colaborador);
-
-    return colaborador;
-}
-
-listar() {
-    return this.colaboradores;
-}
-
-buscarPorMatricula(matricula) {
-    return this.colaboradores.find(
-        colaborador => colaborador.matricula === matricula
-    );
-}
-
+  }
 }
 
 module.exports = ColaboradorService;

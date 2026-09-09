@@ -1,53 +1,48 @@
 const ColaboradorService = require("../services/colaboradorService");
 
 class ColaboradorController {
-constructor() {
-this.service = new ColaboradorService();
-}
+  constructor(service = new ColaboradorService()) {
+    this.service = service;
+  }
 
-cadastrar(req, res) {
+  cadastrar(req, res, next) {
     try {
-        const {
-            matricula,
-            nome,
-            salarioBase,
-            tipoColaborador
-        } = req.body;
+      const colaborador = this.service.cadastrar({
+        ...req.body,
+        tipo: req.body?.tipo ?? req.body?.tipoColaborador,
+      });
 
-        const colaborador = this.service.cadastrar(
-            matricula,
-            nome,
-            salarioBase,
-            tipoColaborador
-        );
-
-        return res.status(201).json(colaborador);
-
+      return res.status(201).json(colaborador);
     } catch (error) {
-        return res.status(400).json({
-            mensagem: error.message
-        });
+      return next(error);
     }
-}
+  }
 
-listar(req, res) {
-    return res.status(200).json(this.service.listar());
-}
+  listar(req, res, next) {
+    try {
+      return res.status(200).json(this.service.listar());
+    } catch (error) {
+      return next(error);
+    }
+  }
 
-buscarPorMatricula(req, res) {
-    const { matricula } = req.params;
+  buscarPorMatricula(req, res, next) {
+    try {
+      const { matricula } = req.params;
 
-    const colaborador = this.service.buscarPorMatricula(matricula);
+      const colaborador = this.service.buscarPorMatricula(matricula);
 
-    if (!colaborador) {
+      if (!colaborador) {
         return res.status(404).json({
-            mensagem: "Colaborador não encontrado."
+          mensagem: "Colaborador não encontrado.",
         });
+      }
+
+      return res.status(200).json(colaborador);
+    } catch (error) {
+      return next(error);
     }
-
-    return res.status(200).json(colaborador);
-}
-
+  }
 }
 
 module.exports = ColaboradorController;
