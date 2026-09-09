@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { cadastrarColaborador } from "../services/colaboradoresStorage";
+import { cadastrarColaborador } from "../services/colaboradoresApi";
 import { formatarMoeda } from "../utils/formatters";
 
 const initialForm = {
@@ -28,6 +28,7 @@ function EmployeesPage() {
   const [errors, setErrors] = useState({});
   const [savedEmployee, setSavedEmployee] = useState(null);
   const [submitError, setSubmitError] = useState("");
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   function handleChange(event) {
     const { name, value } = event.target;
@@ -36,7 +37,7 @@ function EmployeesPage() {
     setSubmitError("");
   }
 
-  function handleSubmit(event) {
+  async function handleSubmit(event) {
     event.preventDefault();
     const validationErrors = validate(form);
 
@@ -46,8 +47,10 @@ function EmployeesPage() {
       return;
     }
 
+    setIsSubmitting(true);
+
     try {
-      const employee = cadastrarColaborador({
+      const employee = await cadastrarColaborador({
         matricula: form.matricula.trim(),
         nome: form.nome.trim(),
         salarioBase: Number(form.salarioBase),
@@ -64,6 +67,8 @@ function EmployeesPage() {
           ? error.message
           : "Não foi possível salvar o cadastro.",
       );
+    } finally {
+      setIsSubmitting(false);
     }
   }
 
@@ -187,8 +192,12 @@ function EmployeesPage() {
 
           <div className="form-actions">
             <p>Os campos deste formulário são obrigatórios.</p>
-            <button className="primary-button" type="submit">
-              Salvar colaborador
+            <button
+              className="primary-button"
+              type="submit"
+              disabled={isSubmitting}
+            >
+              {isSubmitting ? "Salvando..." : "Salvar colaborador"}
               <span aria-hidden="true">→</span>
             </button>
           </div>
@@ -230,7 +239,7 @@ function EmployeesPage() {
           ) : (
             <p className="storage-note">
               <span className="status-dot" aria-hidden="true" />
-              Os dados serão mantidos neste navegador em formato JSON.
+              Os dados serão armazenados no arquivo JSON do servidor.
             </p>
           )}
         </aside>
