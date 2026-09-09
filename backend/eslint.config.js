@@ -1,17 +1,18 @@
-const js = require("@eslint/js");
-const globals = require("globals");
-const sonarjs = require("eslint-plugin-sonarjs");
+import js from "@eslint/js";
+import globals from "globals";
+import tseslint from "typescript-eslint";
+import sonarjs from "eslint-plugin-sonarjs";
 
-module.exports = [
-  { ignores: ["node_modules"] },
+export default [
+  { ignores: ["node_modules/**", "dist/**"] },
   js.configs.recommended,
+  ...tseslint.configs.recommended,
   sonarjs.configs.recommended,
   {
-    files: ["**/*.js"],
-    languageOptions: {
-      ecmaVersion: "latest",
-      globals: globals.node,
-      sourceType: "commonjs",
+    files: ["**/*.{js,ts}"],
+    languageOptions: { globals: globals.node, sourceType: "module" },
+    rules: {
+      "@typescript-eslint/no-unused-vars": ["error", { argsIgnorePattern: "^_", args: "after-used" }],
     },
   },
 ];
