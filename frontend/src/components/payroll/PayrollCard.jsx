@@ -1,7 +1,10 @@
 import { DocumentIcon } from '../ui/Icons'
 import PayrollTable from './PayrollTable'
+import PayrollSummary from './PayrollSummary'
 
-function PayrollCard({ employees, period }) {
+function PayrollCard({ payroll, period }) {
+  const { itens, resumo } = payroll
+
   return (
     <section className="payroll-card" aria-labelledby="payroll-title">
       <header className="payroll-header">
@@ -13,18 +16,25 @@ function PayrollCard({ employees, period }) {
           </div>
         </div>
 
-        <div className="record-count" aria-label={`${employees.length} colaboradores na folha`}>
-          <strong>{employees.length}</strong>
+        <div className="record-count" aria-label={`${resumo.quantidadeColaboradores} colaboradores na folha`}>
+          <strong>{resumo.quantidadeColaboradores}</strong>
           <span>colaboradores</span>
         </div>
       </header>
 
-      <PayrollTable employees={employees} />
+      {itens.length > 0 ? (
+        <PayrollTable employees={itens} />
+      ) : (
+        <div className="payroll-empty">
+          <span aria-hidden="true">0</span>
+          <div>
+            <strong>Folha sem colaboradores</strong>
+            <p>Cadastre colaboradores para gerar os primeiros lançamentos.</p>
+          </div>
+        </div>
+      )}
 
-      <footer className="payroll-footer">
-        <span className="status-dot" aria-hidden="true" />
-        Dados demonstrativos locais — prontos para serem substituídos pela futura fonte JSON.
-      </footer>
+      <PayrollSummary total={resumo.totalFolha} />
     </section>
   )
 }

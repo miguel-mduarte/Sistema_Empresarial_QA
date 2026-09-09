@@ -1,22 +1,38 @@
 const express = require("express");
 const ColaboradorController = require("./controllers/colaboradorController");
+const FolhaPagamentoController = require("./controllers/folhaPagamentoController");
 const ColaboradorRepository = require("./repositories/colaboradorRepository");
 const ColaboradorService = require("./services/colaboradorService");
+const FolhaPagamentoService = require("./services/folhaPagamentoService");
 
 function createApp({ databasePath } = {}) {
   const app = express();
   const repository = new ColaboradorRepository(databasePath);
-  const service = new ColaboradorService(repository);
-  const controller = new ColaboradorController(service);
+  const colaboradorService = new ColaboradorService(repository);
+  const colaboradorController = new ColaboradorController(colaboradorService);
+  const folhaPagamentoService = new FolhaPagamentoService(colaboradorService);
+  const folhaPagamentoController = new FolhaPagamentoController(
+    folhaPagamentoService,
+  );
 
   app.use(express.json());
 
-  app.get("/api/colaboradores", controller.listar.bind(controller));
+  app.get(
+    "/api/folha-pagamento",
+    folhaPagamentoController.gerar.bind(folhaPagamentoController),
+  );
+  app.get(
+    "/api/colaboradores",
+    colaboradorController.listar.bind(colaboradorController),
+  );
   app.get(
     "/api/colaboradores/:matricula",
-    controller.buscarPorMatricula.bind(controller),
+    colaboradorController.buscarPorMatricula.bind(colaboradorController),
   );
-  app.post("/api/colaboradores", controller.cadastrar.bind(controller));
+  app.post(
+    "/api/colaboradores",
+    colaboradorController.cadastrar.bind(colaboradorController),
+  );
 
   app.use((error, req, res, next) => {
     if (res.headersSent) return next(error);
