@@ -2,7 +2,7 @@ import { formatarMoeda } from "../../utils/formatters";
 import EmployeeCompensationDetail from "./EmployeeCompensationDetail";
 import EmployeeTypeBadge from "./EmployeeTypeBadge";
 
-function EmployeesTable({ employees }) {
+function EmployeesTable({ employees, onDelete, onEdit }) {
   return (
     <div className="table-wrapper">
       <table className="employees-table">
@@ -14,6 +14,7 @@ function EmployeesTable({ employees }) {
             <th scope="col" className="salary-column">Salário base</th>
             <th scope="col" className="salary-column">Adicional</th>
             <th scope="col" className="salary-column">Salário final</th>
+            <th scope="col" className="actions-column">Ações</th>
           </tr>
         </thead>
         <tbody>
@@ -42,6 +43,26 @@ function EmployeesTable({ employees }) {
                 className="salary-column salary-value"
               >
                 {formatarMoeda(employee.salarioFinal)}
+              </td>
+              <td data-label="Ações" className="actions-column">
+                <div className="row-actions">
+                  <button
+                    className="table-action-button"
+                    type="button"
+                    onClick={() => onEdit(employee)}
+                    aria-label={`Editar ${employee.nome}`}
+                  >
+                    Editar
+                  </button>
+                  <button
+                    className="table-action-button danger"
+                    type="button"
+                    onClick={() => onDelete(employee)}
+                    aria-label={`Excluir ${employee.nome}`}
+                  >
+                    Excluir
+                  </button>
+                </div>
               </td>
             </tr>
           ))}

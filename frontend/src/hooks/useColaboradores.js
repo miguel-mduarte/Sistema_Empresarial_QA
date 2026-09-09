@@ -50,12 +50,28 @@ function useColaboradores() {
     setColaboradores((current) => [...current, colaborador]);
   }
 
+  function atualizarColaborador(colaboradorAtualizado) {
+    setColaboradores((current) => current.map((colaborador) => (
+      colaborador.id === colaboradorAtualizado.id
+        ? colaboradorAtualizado
+        : colaborador
+    )));
+  }
+
+  function removerColaborador(matricula) {
+    setColaboradores((current) => current.filter(
+      (colaborador) => colaborador.matricula !== matricula,
+    ));
+  }
+
   return {
     adicionarColaborador,
+    atualizarColaborador,
     carregarColaboradores,
     colaboradores,
     isLoading,
     loadError,
+    removerColaborador,
   };
 }
 

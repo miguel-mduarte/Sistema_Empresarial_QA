@@ -35,6 +35,40 @@ class ColaboradorRepository {
     const colaboradores = this.listar();
     colaboradores.push(colaborador);
 
+    this.salvar(colaboradores);
+
+    return colaborador;
+  }
+
+  substituir(matriculaAtual, colaboradorAtualizado) {
+    const colaboradores = this.listar();
+    const indice = colaboradores.findIndex(
+      (colaborador) => colaborador.matricula === matriculaAtual,
+    );
+
+    if (indice === -1) return undefined;
+
+    colaboradores[indice] = colaboradorAtualizado;
+    this.salvar(colaboradores);
+
+    return colaboradorAtualizado;
+  }
+
+  excluir(matricula) {
+    const colaboradores = this.listar();
+    const indice = colaboradores.findIndex(
+      (colaborador) => colaborador.matricula === matricula,
+    );
+
+    if (indice === -1) return undefined;
+
+    const [colaboradorExcluido] = colaboradores.splice(indice, 1);
+    this.salvar(colaboradores);
+
+    return colaboradorExcluido;
+  }
+
+  salvar(colaboradores) {
     const arquivoTemporario = `${this.databasePath}.${process.pid}.tmp`;
     fs.writeFileSync(
       arquivoTemporario,
@@ -42,8 +76,6 @@ class ColaboradorRepository {
       "utf8",
     );
     fs.renameSync(arquivoTemporario, this.databasePath);
-
-    return colaborador;
   }
 }
 

@@ -43,6 +43,29 @@ class ColaboradorController {
       return next(error);
     }
   }
+
+  alterar(req, res, next) {
+    try {
+      const colaborador = this.service.alterar(req.params.matricula, {
+        ...req.body,
+        tipo: req.body?.tipo ?? req.body?.tipoColaborador,
+      });
+
+      return res.status(200).json(colaborador);
+    } catch (error) {
+      return next(error);
+    }
+  }
+
+  excluir(req, res, next) {
+    try {
+      this.service.excluir(req.params.matricula);
+
+      return res.status(204).send();
+    } catch (error) {
+      return next(error);
+    }
+  }
 }
 
 module.exports = ColaboradorController;

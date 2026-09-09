@@ -93,3 +93,17 @@ export function buildEmployeePayload(form) {
 
   return payload;
 }
+
+export function employeeToForm(employee) {
+  return {
+    ...initialEmployeeForm,
+    matricula: employee.matricula,
+    nome: employee.nome,
+    percentualComissao: employee.percentualComissao ?? "",
+    quantidadeProduzida: employee.quantidadeProduzida ?? "",
+    salarioBase: employee.salarioBase,
+    tipo: employee.tipo,
+    valorPorUnidade: employee.valorPorUnidade ?? "",
+    valorVendas: employee.valorVendas ?? "",
+  };
+}

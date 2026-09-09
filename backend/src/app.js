@@ -33,6 +33,14 @@ function createApp({ databasePath } = {}) {
     "/api/colaboradores",
     colaboradorController.cadastrar.bind(colaboradorController),
   );
+  app.put(
+    "/api/colaboradores/:matricula",
+    colaboradorController.alterar.bind(colaboradorController),
+  );
+  app.delete(
+    "/api/colaboradores/:matricula",
+    colaboradorController.excluir.bind(colaboradorController),
+  );
 
   app.use((error, req, res, next) => {
     if (res.headersSent) return next(error);

@@ -1,10 +1,8 @@
 import { useState } from "react";
-import CompensationFields from "../components/employees/CompensationFields";
+import EmployeeFormFields from "../components/employees/EmployeeFormFields";
 import EmployeesList from "../components/employees/EmployeesList";
-import {
-  nomesTiposColaborador,
-  tiposColaborador,
-} from "../data/tiposColaborador";
+import EmployeeMaintenancePanel from "../components/employees/EmployeeMaintenancePanel";
+import { tiposColaborador } from "../data/tiposColaborador";
 import { cadastrarColaborador } from "../services/colaboradoresApi";
 import useColaboradores from "../hooks/useColaboradores";
 import {
@@ -22,11 +20,15 @@ function EmployeesPage() {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const {
     adicionarColaborador,
+    atualizarColaborador,
     carregarColaboradores,
     colaboradores,
     isLoading,
     loadError,
+    removerColaborador,
   } = useColaboradores();
+  const [maintenance, setMaintenance] = useState(null);
+  const [maintenanceMessage, setMaintenanceMessage] = useState("");
 
   function handleChange(event) {
     const { name, value } = event.target;
@@ -91,6 +93,7 @@ function EmployeesPage() {
           <span>RF004</span>
           <span>RF005</span>
           <span>RF006</span>
+          <span>RF009</span>
         </div>
       </section>
 
@@ -106,99 +109,11 @@ function EmployeesPage() {
             </span>
           </header>
 
-          <div className="form-grid">
-            <div className="field-group">
-              <label htmlFor="matricula">Matrícula</label>
-              <input
-                id="matricula"
-                name="matricula"
-                value={form.matricula}
-                onChange={handleChange}
-                placeholder="Ex.: FC-1007"
-                aria-describedby={
-                  errors.matricula ? "matricula-error" : "matricula-hint"
-                }
-                aria-invalid={Boolean(errors.matricula)}
-                autoComplete="off"
-              />
-              {errors.matricula ? (
-                <small className="field-error" id="matricula-error">
-                  {errors.matricula}
-                </small>
-              ) : (
-                <small id="matricula-hint">
-                  Identificador único do colaborador.
-                </small>
-              )}
-            </div>
-
-            <div className="field-group field-group-wide">
-              <label htmlFor="nome">Nome completo</label>
-              <input
-                id="nome"
-                name="nome"
-                value={form.nome}
-                onChange={handleChange}
-                placeholder="Ex.: Mariana Oliveira"
-                aria-describedby={errors.nome ? "nome-error" : undefined}
-                aria-invalid={Boolean(errors.nome)}
-                autoComplete="name"
-              />
-              {errors.nome && (
-                <small className="field-error" id="nome-error">
-                  {errors.nome}
-                </small>
-              )}
-            </div>
-
-            <div className="field-group">
-              <label htmlFor="salarioBase">Salário base</label>
-              <div className="money-input">
-                <span aria-hidden="true">R$</span>
-                <input
-                  id="salarioBase"
-                  name="salarioBase"
-                  value={form.salarioBase}
-                  onChange={handleChange}
-                  type="number"
-                  min="0"
-                  step="0.01"
-                  inputMode="decimal"
-                  placeholder="0,00"
-                  aria-describedby={
-                    errors.salarioBase ? "salario-error" : undefined
-                  }
-                  aria-invalid={Boolean(errors.salarioBase)}
-                />
-              </div>
-              {errors.salarioBase && (
-                <small className="field-error" id="salario-error">
-                  {errors.salarioBase}
-                </small>
-              )}
-            </div>
-
-            <div className="field-group">
-              <label htmlFor="tipo">Tipo de colaborador</label>
-              <select
-                id="tipo"
-                name="tipo"
-                value={form.tipo}
-                onChange={handleChange}
-              >
-                {nomesTiposColaborador.map((tipo) => (
-                  <option key={tipo} value={tipo}>{tipo}</option>
-                ))}
-              </select>
-              <small>{selectedType.descricao}</small>
-            </div>
-
-            <CompensationFields
-              errors={errors}
-              form={form}
-              onChange={handleChange}
-            />
-          </div>
+          <EmployeeFormFields
+            errors={errors}
+            form={form}
+            onChange={handleChange}
+          />
 
           <div className="form-actions">
             <p>Os campos deste formulário são obrigatórios.</p>
@@ -256,8 +171,51 @@ function EmployeesPage() {
         employees={colaboradores}
         isLoading={isLoading}
         loadError={loadError}
+        onDelete={(employee) => {
+          setMaintenance({ action: "delete", employee });
+          setMaintenanceMessage("");
+        }}
+        onEdit={(employee) => {
+          setMaintenance({ action: "edit", employee });
+          setMaintenanceMessage("");
+        }}
         onRetry={carregarColaboradores}
       />
+
+      {maintenanceMessage && (
+        <p className="maintenance-result" role="status">
+          {maintenanceMessage}
+        </p>
+      )}
+
+      {maintenance && (
+        <EmployeeMaintenancePanel
+          key={
+            `${maintenance.action}-${
+              maintenance.employee.id ?? maintenance.employee.matricula
+            }`
+          }
+          action={maintenance.action}
+          employee={maintenance.employee}
+          onCancel={() => setMaintenance(null)}
+          onDeleted={(employee) => {
+            removerColaborador(employee.matricula);
+            setSavedEmployee((current) => (
+              current?.id === employee.id ? null : current
+            ));
+            setMaintenance(null);
+            setMaintenanceMessage(`${employee.nome} foi excluído com sucesso.`);
+          }}
+          onUpdated={(employee) => {
+            atualizarColaborador(employee);
+            setSavedEmployee((current) => (
+              current?.id === employee.id ? employee : current
+            ));
+            setMaintenance(null);
+            setMaintenanceMessage(`${employee.nome} foi atualizado com sucesso.`);
+          }}
+        />
+      )}
     </main>
   );
 }
