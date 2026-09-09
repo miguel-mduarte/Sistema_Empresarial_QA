@@ -1,10 +1,12 @@
 import { useState } from "react";
 import CompensationFields from "../components/employees/CompensationFields";
+import EmployeesList from "../components/employees/EmployeesList";
 import {
   nomesTiposColaborador,
   tiposColaborador,
 } from "../data/tiposColaborador";
 import { cadastrarColaborador } from "../services/colaboradoresApi";
+import useColaboradores from "../hooks/useColaboradores";
 import {
   buildEmployeePayload,
   initialEmployeeForm,
@@ -18,6 +20,13 @@ function EmployeesPage() {
   const [savedEmployee, setSavedEmployee] = useState(null);
   const [submitError, setSubmitError] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const {
+    adicionarColaborador,
+    carregarColaboradores,
+    colaboradores,
+    isLoading,
+    loadError,
+  } = useColaboradores();
 
   function handleChange(event) {
     const { name, value } = event.target;
@@ -44,6 +53,7 @@ function EmployeesPage() {
       const employee = await cadastrarColaborador(buildEmployeePayload(form));
 
       setSavedEmployee(employee);
+      adicionarColaborador(employee);
       setForm(initialEmployeeForm);
       setErrors({});
     } catch (error) {
@@ -68,7 +78,7 @@ function EmployeesPage() {
       >
         <div>
           <p className="eyebrow">GESTÃO DA EQUIPE</p>
-          <h1 id="employees-title">Novo colaborador</h1>
+          <h1 id="employees-title">Colaboradores</h1>
           <p className="subtitle">
             Cadastre colaboradores padrão, comissionados ou por produção com
             os dados necessários para calcular cada remuneração.
@@ -79,6 +89,8 @@ function EmployeesPage() {
           <span>RF002</span>
           <span>RF003</span>
           <span>RF004</span>
+          <span>RF005</span>
+          <span>RF006</span>
         </div>
       </section>
 
@@ -239,6 +251,13 @@ function EmployeesPage() {
           )}
         </aside>
       </div>
+
+      <EmployeesList
+        employees={colaboradores}
+        isLoading={isLoading}
+        loadError={loadError}
+        onRetry={carregarColaboradores}
+      />
     </main>
   );
 }

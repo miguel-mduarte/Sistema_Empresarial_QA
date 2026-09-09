@@ -445,6 +445,97 @@ tbody tr:hover { background: #fbfcfc; }
 .last-saved-card > span { color: var(--muted); font-size: 8px; font-weight: 750; letter-spacing: 1px; }
 .last-saved-card > strong { display: block; margin-top: 7px; color: var(--ink); font-size: 13px; }
 .last-saved-card > p { margin: 5px 0 0; color: var(--muted); font-size: 10px; }
+.employees-list-card {
+  margin-top: 28px;
+  overflow: hidden;
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  background: var(--surface);
+  box-shadow: 0 12px 34px rgba(31, 55, 49, .04);
+}
+.employees-list-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  padding: 23px 26px;
+  border-bottom: 1px solid var(--line);
+}
+.employees-list-header h2 {
+  margin: 6px 0 0;
+  font-size: 18px;
+  font-weight: 650;
+}
+.employees-table { min-width: 960px; }
+.employees-table th, .employees-table td { padding-right: 18px; padding-left: 18px; }
+.employee-type-detail {
+  display: grid;
+  justify-items: start;
+  gap: 7px;
+}
+.compensation-detail {
+  color: var(--muted);
+  font-size: 9px;
+  line-height: 1.45;
+  white-space: nowrap;
+}
+.employees-feedback {
+  min-height: 128px;
+  margin: 0;
+  padding: 36px 26px;
+  color: var(--muted);
+  font-size: 12px;
+}
+.employees-feedback.error {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  background: #fff8f7;
+  color: #913d36;
+}
+.employees-feedback.error p { margin: 0; }
+.employees-feedback.empty {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+.employees-feedback.empty > span {
+  display: grid;
+  width: 44px;
+  height: 44px;
+  flex: none;
+  place-items: center;
+  border-radius: 50%;
+  background: var(--green-soft);
+  color: var(--green);
+  font: 22px Georgia, serif;
+}
+.employees-feedback.empty strong { color: var(--ink); font-size: 13px; }
+.employees-feedback.empty p { margin: 5px 0 0; }
+.secondary-button {
+  min-height: 38px;
+  padding: 0 14px;
+  border: 1px solid #c6d7d1;
+  border-radius: 7px;
+  background: #fff;
+  color: var(--green);
+  cursor: pointer;
+  font-size: 10px;
+  font-weight: 750;
+}
+.secondary-button:hover { border-color: var(--green); }
+.employees-list-footer {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  padding: 15px 26px;
+  border-top: 1px solid var(--line);
+  background: #fafbfb;
+  color: var(--muted);
+  font-size: 10px;
+}
+.employees-list-footer .status-dot { width: 6px; height: 6px; }
 .payroll-footer {
   display: flex;
   align-items: center;
@@ -510,6 +601,13 @@ tbody tr:hover { background: #fbfcfc; }
   .employee-type { justify-self: end; }
   .payroll-footer { margin-top: 12px; border: 1px solid var(--line); border-radius: 9px; }
   .employee-page-heading { flex-direction: column; align-items: flex-start; }
+  .employees-list-card { border: 0; overflow: visible; background: transparent; box-shadow: none; }
+  .employees-list-header { padding: 0 0 20px; }
+  .employees-table { min-width: 0; }
+  .employees-table th, .employees-table td { padding-right: 0; padding-left: 0; }
+  .employee-type-detail { justify-items: end; }
+  .compensation-detail { white-space: normal; text-align: right; }
+  .employees-list-footer { margin-top: 12px; border: 1px solid var(--line); border-radius: 9px; }
   .form-card-header, .form-grid, .form-actions { padding-left: 20px; padding-right: 20px; }
   .form-grid { grid-template-columns: 1fr; }
   .field-group-wide { grid-column: auto; grid-row: auto; }
@@ -527,12 +625,12 @@ tbody tr:hover { background: #fbfcfc; }
 
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
-  .print-button, .primary-button, tbody tr { transition: none; }
+  .print-button, .primary-button, .secondary-button, tbody tr { transition: none; }
 }
 
 @media print {
   :root { background: #fff; }
-  .sidebar, .topbar, .print-button, .payroll-footer { display: none; }
+  .sidebar, .topbar, .print-button, .payroll-footer, .employees-list-footer { display: none; }
   .page { margin: 0; }
   main { width: 100%; max-width: none; padding: 20px; }
   .page-heading { display: block; }

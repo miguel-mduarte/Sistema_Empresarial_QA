@@ -1,13 +1,13 @@
 const { randomUUID } = require("node:crypto");
 
 class Colaborador {
-  constructor({ matricula, nome, salarioBase, tipo }) {
-    this.id = randomUUID();
+  constructor({ id, matricula, nome, salarioBase, tipo, criadoEm }) {
+    this.id = id ?? randomUUID();
     this.matricula = matricula;
     this.nome = nome;
     this.salarioBase = salarioBase;
     this.tipo = tipo;
-    this.criadoEm = new Date().toISOString();
+    this.criadoEm = criadoEm ?? new Date().toISOString();
   }
 
   calcularAdicional() {

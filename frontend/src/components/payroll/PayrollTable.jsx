@@ -1,5 +1,5 @@
 import { formatarMoeda } from '../../utils/formatters'
-import EmployeeTypeBadge from './EmployeeTypeBadge'
+import EmployeeTypeBadge from '../employees/EmployeeTypeBadge'
 
 function PayrollTable({ employees }) {
   return (

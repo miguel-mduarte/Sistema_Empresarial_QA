@@ -14,7 +14,13 @@ class ColaboradorFactory {
   }
 
   static criar(dados) {
-    return criadoresPorTipo[dados.tipo](dados);
+    const criarColaborador = criadoresPorTipo[dados.tipo];
+
+    if (!criarColaborador) {
+      throw new Error(`Tipo de colaborador não suportado: ${dados.tipo}.`);
+    }
+
+    return criarColaborador(dados);
   }
 }
 
