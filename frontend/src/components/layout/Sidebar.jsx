@@ -1,28 +1,30 @@
+import { Link, NavLink } from 'react-router-dom'
+
 const navigationItems = [
-  { id: 'inicio', label: 'Visão geral' },
-  { id: 'colaboradores', label: 'Colaboradores' },
-  { id: 'folha', label: 'Folha de pagamento' },
+  { id: 'inicio', label: 'Visão geral', path: '/' },
+  { id: 'colaboradores', label: 'Colaboradores', path: '/colaboradores' },
+  { id: 'folha', label: 'Folha de pagamento', path: '/folha' },
 ]
 
-function Sidebar({ activePage }) {
+function Sidebar() {
   return (
     <aside className="sidebar">
-      <a className="brand" href="#folha" aria-label="Folha Clara, folha de pagamento">
+      <Link className="brand" to="/folha" aria-label="Folha Clara, folha de pagamento">
         <span className="brand-mark" aria-hidden="true">f.</span>
         <span>folha<strong>clara</strong></span>
-      </a>
+      </Link>
 
       <nav aria-label="Navegação principal">
         <p>ESPAÇO DE TRABALHO</p>
         {navigationItems.map((item) => (
-          <a
-            className={`nav-item${item.id === activePage ? ' active' : ''}`}
-            href={`#${item.id}`}
-            aria-current={item.id === activePage ? 'page' : undefined}
+          <NavLink
+            className={({ isActive }) => `nav-item${isActive ? ' active' : ''}`}
+            end={item.path === '/'}
+            to={item.path}
             key={item.id}
           >
             {item.label}
-          </a>
+          </NavLink>
         ))}
       </nav>
 

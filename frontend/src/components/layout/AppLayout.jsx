@@ -1,10 +1,10 @@
 import Sidebar from './Sidebar'
 import Topbar from './Topbar'
 
-function AppLayout({ activePage, children, currentPage }) {
+function AppLayout({ children, currentPage }) {
   return (
     <div className="app-shell">
-      <Sidebar activePage={activePage} />
+      <Sidebar />
 
       <div className="page">
         <Topbar currentPage={currentPage} />
