@@ -9,6 +9,7 @@ const tempDirectory = fs.mkdtempSync(path.join(os.tmpdir(), "folha-clara-test-")
 const databasePath = path.join(tempDirectory, "colaboradores.json");
 const app = createApp({ databasePath });
 let server;
+let apiRoot;
 let apiUrl;
 
 function cadastrarColaborador(dados) {
@@ -23,7 +24,8 @@ before(async () => {
   await new Promise((resolve) => {
     server = app.listen(0, "127.0.0.1", () => {
       const { port } = server.address();
-      apiUrl = `http://127.0.0.1:${port}/api/colaboradores`;
+      apiRoot = `http://127.0.0.1:${port}/api`;
+      apiUrl = `${apiRoot}/colaboradores`;
       resolve();
     });
   });
@@ -146,6 +148,37 @@ test("recalcula salários ao consultar os registros persistidos", async () => {
   assert.equal(comissionadoCalculado.salarioFinal, 2787.5);
   assert.equal(producaoCalculada.adicional, 2223);
   assert.equal(producaoCalculada.salarioFinal, 4023);
+});
+
+test("gera a folha consolidada e o valor total", async () => {
+  const response = await fetch(`${apiRoot}/folha-pagamento`);
+  const folha = await response.json();
+
+  assert.equal(response.status, 200);
+  assert.deepEqual(folha.resumo, {
+    quantidadeColaboradores: 3,
+    totalFolha: 6810.5,
+  });
+  assert.deepEqual(folha.itens, [
+    {
+      matricula: "FC-1007",
+      nome: "Mariana Oliveira",
+      tipo: "Padrão",
+      salarioFinal: 0,
+    },
+    {
+      matricula: "FC-1008",
+      nome: "Bruno Martins",
+      tipo: "Comissionado",
+      salarioFinal: 2787.5,
+    },
+    {
+      matricula: "FC-1009",
+      nome: "Camila Rocha",
+      tipo: "Produção",
+      salarioFinal: 4023,
+    },
+  ]);
 });
 
 test("valida valores negativos e tipos desconhecidos", async () => {

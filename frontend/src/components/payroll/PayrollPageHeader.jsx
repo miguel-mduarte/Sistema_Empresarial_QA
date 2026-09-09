@@ -11,10 +11,16 @@ function PayrollPageHeader() {
         </p>
       </div>
 
-      <button className="print-button" type="button" onClick={() => window.print()}>
-        <PrintIcon />
-        Imprimir folha
-      </button>
+      <div className="payroll-heading-actions">
+        <div className="requirement-chip" aria-label="Requisitos contemplados">
+          <span>RF007</span>
+          <span>RF008</span>
+        </div>
+        <button className="print-button" type="button" onClick={() => window.print()}>
+          <PrintIcon />
+          Imprimir folha
+        </button>
+      </div>
     </section>
   )
 }

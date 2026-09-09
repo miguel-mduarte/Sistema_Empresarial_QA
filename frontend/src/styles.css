@@ -129,6 +129,11 @@ h1 {
   stroke-linejoin: round;
   stroke-width: 1.7;
 }
+.payroll-heading-actions {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
 
 .payroll-card {
   margin-top: 40px;
@@ -202,6 +207,91 @@ tbody tr:hover { background: #fbfcfc; }
 .employee-type.production { background: #ebf0fa; color: #42628e; }
 .salary-column { text-align: right; }
 .salary-value { color: var(--ink); font-size: 13px; font-weight: 750; font-variant-numeric: tabular-nums; }
+.payroll-summary {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 28px;
+  padding: 22px 26px;
+  border-top: 1px solid var(--line);
+  background: #fafbfb;
+}
+.payroll-source {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  color: var(--muted);
+  font-size: 10px;
+}
+.payroll-source .status-dot { width: 6px; height: 6px; }
+.payroll-total {
+  display: grid;
+  justify-items: end;
+  gap: 4px;
+}
+.payroll-total span {
+  color: var(--muted);
+  font-size: 9px;
+  font-weight: 750;
+  letter-spacing: .9px;
+  text-transform: uppercase;
+}
+.payroll-total strong {
+  color: var(--green);
+  font: 26px Georgia, serif;
+  font-variant-numeric: tabular-nums;
+}
+.payroll-empty, .payroll-feedback {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  min-height: 150px;
+  padding: 34px 26px;
+}
+.payroll-empty > span {
+  display: grid;
+  width: 48px;
+  height: 48px;
+  flex: none;
+  place-items: center;
+  border-radius: 50%;
+  background: var(--green-soft);
+  color: var(--green);
+  font: 24px Georgia, serif;
+}
+.payroll-empty strong, .payroll-feedback h2 {
+  color: var(--ink);
+  font-size: 15px;
+}
+.payroll-empty p, .payroll-feedback p {
+  margin: 6px 0 0;
+  color: var(--muted);
+  font-size: 11px;
+  line-height: 1.6;
+}
+.payroll-feedback {
+  margin-top: 40px;
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  background: var(--surface);
+  box-shadow: 0 12px 34px rgba(31, 55, 49, .04);
+}
+.payroll-feedback h2 { margin: 0; }
+.payroll-feedback.error {
+  justify-content: space-between;
+  background: #fff8f7;
+}
+.loading-mark {
+  width: 13px;
+  height: 13px;
+  flex: none;
+  border-radius: 50%;
+  background: var(--green);
+  animation: loading-pulse 1s ease-in-out infinite alternate;
+}
+@keyframes loading-pulse {
+  to { opacity: .25; transform: scale(.7); }
+}
 .empty-state-card {
   display: flex;
   align-items: center;
@@ -565,6 +655,7 @@ tbody tr:hover { background: #fbfcfc; }
 
 @media (max-width: 620px) {
   .page-heading { align-items: flex-start; flex-direction: column; gap: 22px; }
+  .payroll-heading-actions { width: 100%; align-items: stretch; flex-direction: column; }
   .print-button { width: 100%; }
   .payroll-card { margin-top: 30px; border: 0; overflow: visible; background: transparent; box-shadow: none; }
   .payroll-header { padding: 0 0 20px; }
@@ -600,6 +691,9 @@ tbody tr:hover { background: #fbfcfc; }
   .employee-name { font-size: 12px; }
   .employee-type { justify-self: end; }
   .payroll-footer { margin-top: 12px; border: 1px solid var(--line); border-radius: 9px; }
+  .payroll-summary { align-items: flex-start; flex-direction: column; }
+  .payroll-total { width: 100%; justify-items: start; }
+  .payroll-feedback.error { align-items: stretch; flex-direction: column; }
   .employee-page-heading { flex-direction: column; align-items: flex-start; }
   .employees-list-card { border: 0; overflow: visible; background: transparent; box-shadow: none; }
   .employees-list-header { padding: 0 0 20px; }
@@ -626,11 +720,12 @@ tbody tr:hover { background: #fbfcfc; }
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
   .print-button, .primary-button, .secondary-button, tbody tr { transition: none; }
+  .loading-mark { animation: none; }
 }
 
 @media print {
   :root { background: #fff; }
-  .sidebar, .topbar, .print-button, .payroll-footer, .employees-list-footer { display: none; }
+  .sidebar, .topbar, .print-button, .payroll-source, .payroll-footer, .employees-list-footer, .requirement-chip { display: none; }
   .page { margin: 0; }
   main { width: 100%; max-width: none; padding: 20px; }
   .page-heading { display: block; }
