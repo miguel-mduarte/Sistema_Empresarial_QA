@@ -29,11 +29,13 @@ class ColaboradorService {
   }
 
   listar() {
-    return this.repository.listar();
+    return this.repository.listar().map(
+      (colaborador) => ColaboradorFactory.criar(colaborador),
+    );
   }
 
   buscarPorMatricula(matricula) {
-    return this.repository.listar().find(
+    return this.listar().find(
       (colaborador) => colaborador.matricula.localeCompare(
         matricula,
         "pt-BR",

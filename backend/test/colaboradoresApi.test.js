@@ -117,6 +117,37 @@ test("cadastra colaborador por produção e calcula a produtividade", async () =
   assert.equal(colaborador.valorPorUnidade, 12.35);
 });
 
+test("recalcula salários ao consultar os registros persistidos", async () => {
+  const persistidos = JSON.parse(fs.readFileSync(databasePath, "utf8"));
+  const comissionado = persistidos.find(
+    (colaborador) => colaborador.tipo === "Comissionado",
+  );
+  const producao = persistidos.find(
+    (colaborador) => colaborador.tipo === "Produção",
+  );
+
+  comissionado.adicional = 1;
+  comissionado.salarioFinal = 1;
+  producao.adicional = 1;
+  producao.salarioFinal = 1;
+  fs.writeFileSync(databasePath, JSON.stringify(persistidos), "utf8");
+
+  const response = await fetch(apiUrl);
+  const colaboradores = await response.json();
+  const comissionadoCalculado = colaboradores.find(
+    (colaborador) => colaborador.tipo === "Comissionado",
+  );
+  const producaoCalculada = colaboradores.find(
+    (colaborador) => colaborador.tipo === "Produção",
+  );
+
+  assert.equal(response.status, 200);
+  assert.equal(comissionadoCalculado.adicional, 787.5);
+  assert.equal(comissionadoCalculado.salarioFinal, 2787.5);
+  assert.equal(producaoCalculada.adicional, 2223);
+  assert.equal(producaoCalculada.salarioFinal, 4023);
+});
+
 test("valida valores negativos e tipos desconhecidos", async () => {
   const invalidSalary = await cadastrarColaborador({
     matricula: "FC-1010",
