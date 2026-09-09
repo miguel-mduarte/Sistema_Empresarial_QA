@@ -556,7 +556,7 @@ tbody tr:hover { background: #fbfcfc; }
   font-size: 18px;
   font-weight: 650;
 }
-.employees-table { min-width: 960px; }
+.employees-table { min-width: 1080px; }
 .employees-table th, .employees-table td { padding-right: 18px; padding-left: 18px; }
 .employee-type-detail {
   display: grid;
@@ -615,6 +615,94 @@ tbody tr:hover { background: #fbfcfc; }
   font-weight: 750;
 }
 .secondary-button:hover { border-color: var(--green); }
+.row-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 6px;
+}
+.actions-column { text-align: right; }
+.table-action-button {
+  min-height: 32px;
+  padding: 0 9px;
+  border: 1px solid #c6d7d1;
+  border-radius: 6px;
+  background: #fff;
+  color: var(--green);
+  cursor: pointer;
+  font-size: 9px;
+  font-weight: 750;
+}
+.table-action-button:hover { border-color: var(--green); background: #f5faf8; }
+.table-action-button.danger { border-color: #e4c8c5; color: #9a4039; }
+.table-action-button.danger:hover { border-color: #b7554e; background: #fff7f6; }
+.maintenance-panel {
+  margin-top: 20px;
+  overflow: hidden;
+  border: 1px solid #bcd2ca;
+  border-radius: 14px;
+  background: var(--surface);
+  box-shadow: 0 12px 34px rgba(31, 55, 49, .05);
+}
+.maintenance-panel.danger { border-color: #e4c8c5; }
+.maintenance-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  padding: 22px 28px;
+  border-bottom: 1px solid var(--line);
+  background: #f8fbfa;
+}
+.maintenance-panel.danger .maintenance-header { background: #fff8f7; }
+.maintenance-header h2 {
+  margin: 6px 0 0;
+  font-size: 18px;
+  font-weight: 650;
+}
+.maintenance-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  padding: 18px 28px;
+  border-top: 1px solid var(--line);
+  background: #fafbfb;
+}
+.danger-button {
+  min-height: 42px;
+  padding: 0 16px;
+  border: 0;
+  border-radius: 8px;
+  background: #a84942;
+  color: #fff;
+  cursor: pointer;
+  font-size: 10px;
+  font-weight: 750;
+}
+.danger-button:hover { background: #8d3731; }
+.danger-button:disabled { cursor: wait; opacity: .65; }
+.delete-confirmation > p {
+  max-width: 720px;
+  margin: 0;
+  padding: 24px 28px 0;
+  color: var(--muted);
+  font-size: 12px;
+  line-height: 1.7;
+}
+.delete-confirmation > p + p { padding-top: 5px; padding-bottom: 24px; }
+.maintenance-feedback, .maintenance-result {
+  margin: 0;
+  padding: 13px 28px;
+  border-top: 1px solid var(--line);
+  font-size: 11px;
+}
+.maintenance-feedback.error { background: #fff2f0; color: #913d36; }
+.maintenance-result {
+  margin-top: 16px;
+  border: 1px solid #c6ded3;
+  border-radius: 9px;
+  background: #edf6f1;
+  color: #28604f;
+}
 .employees-list-footer {
   display: flex;
   align-items: center;
@@ -700,6 +788,7 @@ tbody tr:hover { background: #fbfcfc; }
   .employees-table { min-width: 0; }
   .employees-table th, .employees-table td { padding-right: 0; padding-left: 0; }
   .employee-type-detail { justify-items: end; }
+  .row-actions { justify-content: flex-end; }
   .compensation-detail { white-space: normal; text-align: right; }
   .employees-list-footer { margin-top: 12px; border: 1px solid var(--line); border-radius: 9px; }
   .form-card-header, .form-grid, .form-actions { padding-left: 20px; padding-right: 20px; }
@@ -709,6 +798,12 @@ tbody tr:hover { background: #fbfcfc; }
   .compensation-grid { grid-template-columns: 1fr; }
   .form-actions { align-items: stretch; flex-direction: column; }
   .primary-button { width: 100%; }
+  .maintenance-header { padding-right: 20px; padding-left: 20px; }
+  .maintenance-actions { align-items: stretch; flex-direction: column-reverse; padding: 18px 20px; }
+  .maintenance-actions .primary-button,
+  .maintenance-actions .secondary-button,
+  .danger-button { width: 100%; }
+  .delete-confirmation > p { padding-right: 20px; padding-left: 20px; }
 }
 
 @media (max-width: 410px) {
@@ -719,7 +814,7 @@ tbody tr:hover { background: #fbfcfc; }
 
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
-  .print-button, .primary-button, .secondary-button, tbody tr { transition: none; }
+  .print-button, .primary-button, .secondary-button, .table-action-button, tbody tr { transition: none; }
   .loading-mark { animation: none; }
 }
 

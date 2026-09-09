@@ -1,6 +1,13 @@
 import EmployeesTable from "./EmployeesTable";
 
-function EmployeesList({ employees, isLoading, loadError, onRetry }) {
+function EmployeesList({
+  employees,
+  isLoading,
+  loadError,
+  onDelete,
+  onEdit,
+  onRetry,
+}) {
   let content;
 
   if (isLoading) {
@@ -29,7 +36,13 @@ function EmployeesList({ employees, isLoading, loadError, onRetry }) {
       </div>
     );
   } else {
-    content = <EmployeesTable employees={employees} />;
+    content = (
+      <EmployeesTable
+        employees={employees}
+        onDelete={onDelete}
+        onEdit={onEdit}
+      />
+    );
   }
 
   return (

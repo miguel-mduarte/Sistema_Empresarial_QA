@@ -2,6 +2,7 @@ function NumberField({
   addon,
   error,
   hint,
+  idPrefix,
   label,
   min = "0",
   name,
@@ -9,16 +10,17 @@ function NumberField({
   step,
   value,
 }) {
-  const errorId = `${name}-error`;
-  const hintId = `${name}-hint`;
+  const inputId = `${idPrefix}${name}`;
+  const errorId = `${inputId}-error`;
+  const hintId = `${inputId}-hint`;
 
   return (
     <div className="field-group">
-      <label htmlFor={name}>{label}</label>
+      <label htmlFor={inputId}>{label}</label>
       <div className={`number-input ${addon ? "has-addon" : ""}`}>
         {addon && <span aria-hidden="true">{addon}</span>}
         <input
-          id={name}
+          id={inputId}
           name={name}
           value={value}
           onChange={onChange}
@@ -37,7 +39,7 @@ function NumberField({
   );
 }
 
-function CompensationFields({ errors, form, onChange }) {
+function CompensationFields({ errors, form, idPrefix = "", onChange }) {
   if (form.tipo === "Padrão") return null;
 
   return (
@@ -50,6 +52,7 @@ function CompensationFields({ errors, form, onChange }) {
               addon="R$"
               error={errors.valorVendas}
               hint="Total de vendas usado no cálculo da comissão."
+              idPrefix={idPrefix}
               label="Valor das vendas"
               name="valorVendas"
               onChange={onChange}
@@ -60,6 +63,7 @@ function CompensationFields({ errors, form, onChange }) {
               addon="%"
               error={errors.percentualComissao}
               hint="Percentual aplicado sobre o valor das vendas."
+              idPrefix={idPrefix}
               label="Percentual de comissão"
               name="percentualComissao"
               onChange={onChange}
@@ -72,6 +76,7 @@ function CompensationFields({ errors, form, onChange }) {
             <NumberField
               error={errors.quantidadeProduzida}
               hint="Quantidade total produzida no período."
+              idPrefix={idPrefix}
               label="Quantidade produzida"
               name="quantidadeProduzida"
               onChange={onChange}
@@ -82,6 +87,7 @@ function CompensationFields({ errors, form, onChange }) {
               addon="R$"
               error={errors.valorPorUnidade}
               hint="Valor pago por cada unidade produzida."
+              idPrefix={idPrefix}
               label="Valor por unidade"
               name="valorPorUnidade"
               onChange={onChange}
