@@ -32,8 +32,9 @@ export interface MaintenanceProps {
   onDeleted: (employee: Colaborador) => void;
   onUpdated: (employee: Colaborador) => void;
 }
-export type PayrollItem = Pick<Colaborador, "matricula" | "nome" | "tipo" | "salarioFinal">;
+export type PayrollItem = Pick<Colaborador, "matricula" | "nome" | "tipo" | "salarioBase" | "adicional" | "salarioFinal">;
+export interface CategoryTotal { tipo: TipoColaborador; quantidadeColaboradores: number; total: number }
 export interface FolhaPagamento {
   itens: PayrollItem[];
-  resumo: { quantidadeColaboradores: number; totalFolha: number };
+  resumo: { quantidadeColaboradores: number; totalFolha: number; totaisPorCategoria: CategoryTotal[] };
 }

@@ -4,7 +4,7 @@ function PayrollPageHeader() {
   return (
     <section className="page-heading" aria-labelledby="page-title">
       <div>
-        <p className="eyebrow">FECHAMENTO MENSAL</p>
+        <p className="eyebrow">RELATÓRIO DO CADASTRO ATUAL</p>
         <h1 id="page-title">Folha de pagamento</h1>
         <p className="subtitle">
           Consulte os salários finais de todos os colaboradores em uma visão clara e organizada.

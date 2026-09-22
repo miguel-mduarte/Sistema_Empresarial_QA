@@ -818,7 +818,13 @@ tbody tr:hover { background: #fbfcfc; }
   .loading-mark { animation: none; }
 }
 
+.category-summary, .individual-payroll { padding: 24px; }
+.category-grid, .individual-fields { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 20px; }
+.category-grid dd, .individual-fields dd { margin: 8px 0 0; font-size: 1.2rem; font-weight: 700; }
+.individual-payroll > p:last-child { margin-top: 24px; }
+
 @media print {
+  .no-print { display: none !important; }
   :root { background: #fff; }
   .sidebar, .topbar, .print-button, .payroll-source, .payroll-footer, .employees-list-footer, .requirement-chip { display: none; }
   .page { margin: 0; }

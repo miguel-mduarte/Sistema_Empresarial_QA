@@ -51,6 +51,22 @@ after(async () => {
   fs.rmSync(tempDirectory, { recursive: true, force: true });
 });
 
+test("gera folha vazia com totais zerados em todas as categorias", async () => {
+  const response = await fetch(`${apiRoot}/folha-pagamento`);
+  assert.equal(response.status, 200);
+  assert.deepEqual(await response.json(), {
+    itens: [],
+    resumo: {
+      quantidadeColaboradores: 0, totalFolha: 0,
+      totaisPorCategoria: [
+        { tipo: "Padrão", quantidadeColaboradores: 0, total: 0 },
+        { tipo: "Comissionado", quantidadeColaboradores: 0, total: 0 },
+        { tipo: "Produção", quantidadeColaboradores: 0, total: 0 },
+      ],
+    },
+  });
+});
+
 test("cadastra e persiste um colaborador padrão", async () => {
   const response = await cadastrarColaborador({
     matricula: "FC-1007",
@@ -175,24 +191,35 @@ test("gera a folha consolidada e o valor total", async () => {
   assert.deepEqual(folha.resumo, {
     quantidadeColaboradores: 3,
     totalFolha: 6810.5,
+    totaisPorCategoria: [
+      { tipo: "Padrão", quantidadeColaboradores: 1, total: 0 },
+      { tipo: "Comissionado", quantidadeColaboradores: 1, total: 2787.5 },
+      { tipo: "Produção", quantidadeColaboradores: 1, total: 4023 },
+    ],
   });
   assert.deepEqual(folha.itens, [
     {
       matricula: "FC-1007",
       nome: "Mariana Oliveira",
       tipo: "Padrão",
+      salarioBase: 0,
+      adicional: 0,
       salarioFinal: 0,
     },
     {
       matricula: "FC-1008",
       nome: "Bruno Martins",
       tipo: "Comissionado",
+      salarioBase: 2000,
+      adicional: 787.5,
       salarioFinal: 2787.5,
     },
     {
       matricula: "FC-1009",
       nome: "Camila Rocha",
       tipo: "Produção",
+      salarioBase: 1800,
+      adicional: 2223,
       salarioFinal: 4023,
     },
   ]);
@@ -292,6 +319,11 @@ test("exclui o colaborador do arquivo JSON e atualiza a folha", async () => {
   assert.deepEqual(folha.resumo, {
     quantidadeColaboradores: 2,
     totalFolha: 6810.5,
+    totaisPorCategoria: [
+      { tipo: "Padrão", quantidadeColaboradores: 0, total: 0 },
+      { tipo: "Comissionado", quantidadeColaboradores: 1, total: 2787.5 },
+      { tipo: "Produção", quantidadeColaboradores: 1, total: 4023 },
+    ],
   });
 });
 
