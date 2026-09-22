@@ -2,7 +2,7 @@ import assert from "node:assert/strict";
 import fs from "node:fs";
 import os from "node:os";
 import path from "node:path";
-import { after, before, test } from "node:test";
+import { afterAll, beforeAll, test } from "vitest";
 import createApp from "../src/app.js";
 import type { Server } from "node:http";
 import type { AddressInfo } from "node:net";
@@ -33,7 +33,7 @@ function alterarColaborador(matricula: string, dados: unknown) {
   });
 }
 
-before(async () => {
+beforeAll(async () => {
   await new Promise<void>((resolve) => {
     server = app.listen(0, "127.0.0.1", () => {
       const { port } = server.address() as AddressInfo;
@@ -44,7 +44,7 @@ before(async () => {
   });
 });
 
-after(async () => {
+afterAll(async () => {
   await new Promise<void>((resolve, reject) => {
     server.close((error) => (error ? reject(error) : resolve()));
   });
