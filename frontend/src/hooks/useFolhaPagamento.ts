@@ -7,6 +7,7 @@ const emptyPayroll: FolhaPagamento = {
   resumo: {
     quantidadeColaboradores: 0,
     totalFolha: 0,
+    totaisPorCategoria: [],
   },
 };
 

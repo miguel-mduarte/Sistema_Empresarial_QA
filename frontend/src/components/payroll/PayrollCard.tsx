@@ -2,6 +2,7 @@ import type { FolhaPagamento } from "../../types/colaborador";
 import { DocumentIcon } from '../ui/Icons'
 import PayrollTable from './PayrollTable'
 import PayrollSummary from './PayrollSummary'
+import PayrollCategorySummary from './PayrollCategorySummary'
 
 function PayrollCard({ payroll, period }: { payroll: FolhaPagamento; period: string }) {
   const { itens, resumo } = payroll
@@ -36,6 +37,7 @@ function PayrollCard({ payroll, period }: { payroll: FolhaPagamento; period: str
       )}
 
       <PayrollSummary total={resumo.totalFolha} />
+      <PayrollCategorySummary categories={resumo.totaisPorCategoria} />
     </section>
   )
 }

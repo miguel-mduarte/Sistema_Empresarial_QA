@@ -3,8 +3,10 @@ import AppLayout from '../components/layout/AppLayout'
 import EmployeesPage from '../pages/EmployeesPage'
 import OverviewPage from '../pages/OverviewPage'
 import PayrollPage from '../pages/PayrollPage'
+import IndividualPayrollPage from '../pages/IndividualPayrollPage'
 
 const routes = [
+  { path: '/folha/:matricula', title: 'Folha individual', component: IndividualPayrollPage },
   {
     path: '/',
     title: 'Visão geral',
