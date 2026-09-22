@@ -25,10 +25,14 @@ export default function createApp({ databasePath }: { databasePath?: string } = 
   return app;
 }
 
+export function startServer({ databasePath, port }: { databasePath?: string; port?: number } = {}) {
+  dotenv.config({ quiet: true });
+  const app = createApp({ databasePath: databasePath ?? process.env.COLABORADORES_DB_PATH });
+  const listenPort = port ?? (Number(process.env.PORT) || 3000);
+  return app.listen(listenPort, () => console.log(`Servidor iniciado na porta ${listenPort}`));
+}
+
 // Executado por npm run dev / npm start; importar nos testes não abre uma porta.
 if (process.argv[1] && import.meta.url === pathToFileURL(process.argv[1]).href) {
-  dotenv.config({ quiet: true });
-  const app = createApp({ databasePath: process.env.COLABORADORES_DB_PATH });
-  const port = Number(process.env.PORT) || 3000;
-  app.listen(port, () => console.log(`Servidor iniciado na porta ${port}`));
+  startServer();
 }
