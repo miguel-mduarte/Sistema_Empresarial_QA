@@ -1,0 +1,31 @@
+1257880d04fe72a6b6ca974b50ef08aed727cd3b | 2026-09-29T19:11:57-03:00 | Felipe Vergara Chico | Relatorio de testes
+94dd328f936608f1e582e98dbde3e9a531ab06eb | 2026-09-22T20:33:11-03:00 | Felipe Vergara Chico | feat: add Vitest configuration and coverage support, implement coverage tests for API
+cd3fda1e41a30007179fdfd18e6010c311b1dc13 | 2026-09-22T20:11:08-03:00 | Felipe Vergara Chico | feat: implement functional requirements tests for payroll system
+1c76ad3292b004feb5f6a64e1e143f6ffd7c9758 | 2026-09-22T20:09:35-03:00 | Felipe Vergara Chico | refactor: migrate tests to use Vitest framework
+5e2ed40e07214a430abc3f963bedc30c0ec88aea | 2026-09-22T19:04:13-03:00 | Nicolas Uliana Ramos | Merge pull request #12 from miguel-mduarte/feature/completar-relatorios-folha
+2a243cb1a0370adf34f3b629dc0ec83f0e13f011 | 2026-09-22T18:56:14-03:00 | Nicolas Uliana Ramos | feat: add individual payroll generation and reporting features
+cbaa63962b6cb3ddb5ea9992b1960e0d50aa7f7d | 2026-09-09T20:03:16-03:00 | Nicolas Uliana Ramos | Merge pull request #11 from miguel-mduarte/fix/javascript-to-typescript
+96996234e2f075ec16b3a68d7e5dadca0937a8b3 | 2026-09-09T20:01:55-03:00 | Nicolas Uliana Ramos | Transformando codigo Javascript para Typescript
+e42c153273a5fc512030ed822a6e07806499e47a | 2026-09-09T19:22:31-03:00 | Felipe Vergara | Merge pull request #10 from miguel-mduarte/feature/rf009
+d3a6bb121982545eed3d6b796ef678325bb15667 | 2026-09-09T19:21:36-03:00 | Felipe Vergara Chico | feat: implement update and delete functionalities for colaboradores
+e64165bcd4b37fd7abd7894053f149cc5570a37e | 2026-09-09T18:54:01-03:00 | Felipe Vergara | Merge pull request #9 from miguel-mduarte/feature/rf007-008
+552ef5fa9643d86e70e44676aebee2c8ba70c7a9 | 2026-09-09T18:51:52-03:00 | Felipe Vergara Chico | feat: implement payroll generation feature with API integration and UI components
+435455ba061367675e60186b27b9be8675613ea4 | 2026-09-09T14:22:00-03:00 | Felipe Vergara | Merge pull request #8 from miguel-mduarte/feature/rf005-006
+c34ce6d2b1d4b578a7e9c7bfb5273de801ca8ceb | 2026-09-09T14:21:20-03:00 | Felipe Vergara Chico | feat: enhance collaborator management with error handling, new components, and improved salary calculations
+fb1617c958b454a7308a929418193bafbfd14997 | 2026-09-09T13:34:50-03:00 | Felipe Vergara | Merge pull request #7 from miguel-mduarte/feature/rf003-004
+7d5d73216e5bdc9b91cc1c933300cb726b6e5f20 | 2026-09-09T13:32:38-03:00 | Felipe Vergara Chico | feat: add dotenv configuration and update environment settings
+c0776f616190b83001c46a1851e06b6587af6f87 | 2026-09-09T13:30:33-03:00 | Felipe Vergara Chico | feat: implement collaborator management with dynamic remuneration calculations
+9569b9e341557792d9bbe456e8591a65f5b747b2 | 2026-09-09T12:00:52-03:00 | Felipe Vergara | Merge pull request #6 from miguel-mduarte/feature/integrate-back-and-front
+339e94a6625835e09fc64a2e05a8e0f00f1fffec | 2026-09-09T11:59:59-03:00 | Felipe Vergara Chico | feat: restructure backend API for colaboradores management
+f3c43e168e990658007907b9d85108f66bb4254e | 2026-09-08T21:17:35-03:00 | Felipe Vergara | Merge pull request #5 from miguel-mduarte/feature/rf001-002
+07df1e98f11a2c8bf2632785758b2b8245bd5338 | 2026-09-08T21:16:41-03:00 | Felipe Vergara Chico | feat:(front): add employee registration form and local storage functionality
+8208fecad794635003890c85a8eb2ac9c176af06 | 2026-09-08T21:05:16-03:00 | Nicolas Uliana Ramos | Merge pull request #4 from miguel-mduarte/fix/use-react-router-dom
+58f92e54a687b7a70c0c8adb23ef96d6625d06a5 | 2026-09-08T21:04:49-03:00 | Nicolas Uliana Ramos | feat(front): integrate react-router-dom for improved routing and navigation
+27543cb6ebf41222bf288cfb08472fc51e3f95ee | 2026-09-08T21:00:09-03:00 | Felipe Vergara | Merge pull request #3 from miguel-mduarte/esqueleto-backend
+cd6b29237e8d5325bacf602ab6519da68f4387d4 | 2026-09-08T20:58:30-03:00 | Victorpa12 | upando o esqueleto do backend
+8375ec6565867138f4600716d4a93975d896a3d4 | 2026-09-08T20:48:54-03:00 | Nicolas Uliana Ramos | Merge pull request #2 from miguel-mduarte/feature/components-and-RF007
+5ffab369cef54f4282c06b5f677949c8e8a621db | 2026-09-08T20:48:10-03:00 | Nicolas Uliana Ramos | feat(front): implement payroll management system with routing and layout components
+3cb9315224d18e90701d67d7de2ef80954f47a6e | 2026-09-08T20:16:19-03:00 | Felipe Vergara Chico | feat(front):moved frontend files to front folder
+63ceb5e8146aa3630ee4b9c28e4da7c1a3d68e0d | 2026-09-08T20:05:23-03:00 | Victor Pithan Altnetter | Merge pull request #1 from miguel-mduarte/feature/esqueleto-inicial
+04ab62c4c4fb8094ecc3fc74ed6851279c6649d9 | 2026-09-08T20:02:54-03:00 | Felipe Vergara Chico | Esqueleto do react com vite iniciado, + design patterns
+19eed920ae8ad338281723696fa63fc77f4e5ded | 2026-09-08T19:51:53-03:00 | Felipe Vergara Chico | Initial commit

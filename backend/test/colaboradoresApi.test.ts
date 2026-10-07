@@ -539,6 +539,80 @@ test("express-validator retorna erros de campos sem alterar o arquivo", async ()
   assert.equal(fs.readFileSync(databasePath, "utf8"), antes);
 });
 
+test.each(["POST", "PUT"])("RF001/RF003/RF004/RF009 - RNF002: %s rejeita números inválidos sem corromper a persistência", async (method) => {
+  const antes = fs.readFileSync(databasePath, "utf8");
+  const campos = ["salarioBase", "valorVendas", "percentualComissao", "quantidadeProduzida", "valorPorUnidade"];
+  for (const campo of campos) {
+    for (const valor of ["0x10", "0b10", "1e309", "Infinity", "123abc", null, true, ""]) {
+      const dados = {
+        matricula: "REGRESSAO", nome: "Regressão numérica", salarioBase: 1000,
+        tipo: ["quantidadeProduzida", "valorPorUnidade"].includes(campo) ? "Produção" : "Comissionado",
+        valorVendas: 100, percentualComissao: 5, quantidadeProduzida: 10, valorPorUnidade: 2,
+        [campo]: valor,
+      };
+      const resposta = method === "POST"
+        ? await cadastrarColaborador(dados)
+        : await alterarColaborador("FC-1008", dados);
+      assert.equal(resposta.status, 400, `${method} ${campo}=${String(valor)}`);
+      assert.equal(fs.readFileSync(databasePath, "utf8"), antes);
+    }
+  }
+  assert.equal((await fetch(apiUrl)).status, 200);
+  const folha = await fetch(`${apiRoot}/folha-pagamento`);
+  assert.equal(folha.status, 200);
+  assert.equal((await folha.json()).resumo.totalFolha, 6810.5);
+});
+
+test.each(["POST", "PUT"])("RF006/RF008/RF009 - RN008: %s rejeita estouro numérico antes de gravar", async (method) => {
+  const antes = fs.readFileSync(databasePath, "utf8");
+  const casos = [
+    { tipo: "Padrão", salarioBase: 1e308 },
+    { tipo: "Produção", salarioBase: 1000, quantidadeProduzida: 1e200, valorPorUnidade: 1e200 },
+    { tipo: "Comissionado", salarioBase: 1000, valorVendas: 1e200, percentualComissao: 1e200 },
+    { tipo: "Produção", salarioBase: 1000, quantidadeProduzida: 1e10, valorPorUnidade: 1e10 },
+  ];
+  for (const caso of casos) {
+    const dados = { matricula: "REGRESSAO", nome: "Regressão de cálculo", ...caso };
+    const resposta = method === "POST"
+      ? await cadastrarColaborador(dados)
+      : await alterarColaborador("FC-1008", dados);
+    assert.equal(resposta.status, 400);
+    assert.match((await resposta.json()).mensagem, /limite numérico seguro/);
+    assert.equal(fs.readFileSync(databasePath, "utf8"), antes);
+  }
+  const folha = await fetch(`${apiRoot}/folha-pagamento`);
+  assert.equal(folha.status, 200);
+  assert.equal((await folha.json()).resumo.totalFolha, 6810.5);
+});
+
+test.each(["POST", "PUT"])("RF001/RF007/RF009: %s rejeita matrículas reservadas sem modificar os cadastros", async (method) => {
+  const antes = fs.readFileSync(databasePath, "utf8");
+  for (const matricula of [".", "..", " . ", " .. "]) {
+    const dados = { matricula, nome: "Matrícula reservada", tipo: "Padrão", salarioBase: 1000 };
+    const resposta = method === "POST"
+      ? await cadastrarColaborador(dados)
+      : await alterarColaborador("FC-1008", dados);
+    assert.equal(resposta.status, 400);
+    assert.equal(fs.readFileSync(databasePath, "utf8"), antes);
+  }
+  assert.equal((await fetch(`${apiRoot}/folha-pagamento/FC-1008`)).status, 200);
+});
+
+test("RF003/RF006/RF009: aceita decimais e notação científica finita e preserva matrícula com ponto interno", async () => {
+  const dados = {
+    matricula: "REG.01", nome: "Decimal válido", tipo: "Comissionado",
+    salarioBase: "1e3", valorVendas: "2000.50", percentualComissao: "5",
+  };
+  const cadastro = await cadastrarColaborador(dados);
+  assert.equal(cadastro.status, 201);
+  assert.equal((await cadastro.json()).salarioFinal, 1100.03);
+  const alteracao = await alterarColaborador(dados.matricula, { ...dados, salarioBase: "0" });
+  assert.equal(alteracao.status, 200);
+  assert.equal((await alteracao.json()).salarioFinal, 100.03);
+  assert.equal((await fetch(`${apiRoot}/folha-pagamento/REG.01`)).status, 200);
+  assert.equal((await fetch(`${apiUrl}/REG.01`, { method: "DELETE" })).status, 204);
+});
+
 test("arquivo corrompido resulta em 500 e não é sobrescrito", async () => {
   const anterior = fs.readFileSync(databasePath, "utf8");
   try {

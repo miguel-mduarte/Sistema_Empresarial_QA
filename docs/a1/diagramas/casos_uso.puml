@@ -1,0 +1,27 @@
+@startuml
+left to right direction
+actor Administrador
+rectangle "Folha Clara" {
+  usecase "UC01 Cadastrar colaborador" as UC01
+  usecase "UC02 Consultar colaboradores" as UC02
+  usecase "UC03 Gerar folha" as UC03
+  usecase "UC04 Emitir resumo" as UC04
+  usecase "UC05 Alterar cadastro" as UC05
+  usecase "UC06 Excluir cadastro" as UC06
+  usecase "UC07 Calcular remuneração" as UC07
+  usecase "UC08 Folha individual" as UC08
+}
+Administrador -- UC01
+Administrador -- UC02
+Administrador -- UC03
+Administrador -- UC04
+Administrador -- UC05
+Administrador -- UC06
+Administrador -- UC08
+UC01 ..> UC07 : <<include>>
+UC02 ..> UC07 : <<include>>
+UC03 ..> UC07 : <<include>>
+UC04 ..> UC07 : <<include>>
+UC05 ..> UC07 : <<include>>
+UC08 ..> UC07 : <<include>>
+@enduml

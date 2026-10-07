@@ -13,7 +13,7 @@ const numberFormatter = new Intl.NumberFormat('pt-BR', {
 })
 
 export function formatarMoeda(value: number) {
-  return currencyFormatter.format(value)
+  return Number.isFinite(value) ? currencyFormatter.format(value) : 'Valor indisponível'
 }
 
 export function formatarCompetencia(date: Date) {

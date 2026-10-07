@@ -3,7 +3,10 @@ function validateNonNegativeNumber(value: string, emptyMessage: string, invalidM
   if (value === "") return emptyMessage;
 
   const number = Number(value);
-  return !Number.isFinite(number) || number < 0 ? invalidMessage : undefined;
+  if (!Number.isFinite(number) || number < 0) return invalidMessage;
+  return number > Number.MAX_SAFE_INTEGER / 100
+    ? "O valor excede o limite numérico seguro."
+    : undefined;
 }
 
 const specificValidators = {
@@ -62,6 +65,10 @@ export function validateEmployeeForm(form: EmployeeForm): FormErrors {
     ),
     ...specificValidators[form.tipo](form),
   };
+
+  if ([".", ".."].includes(form.matricula.trim())) {
+    errors.matricula = "Use uma matrícula diferente de ponto ou dois pontos consecutivos.";
+  }
 
   return Object.fromEntries(
     Object.entries(errors).filter(([, message]) => message),

@@ -1,4 +1,5 @@
 import { randomUUID } from "node:crypto";
+import ErroDeNegocio from "../errors/erroDeNegocio.js";
 import type { DadosColaborador, TipoColaborador } from "./colaboradorTypes.js";
 
 class Colaborador {
@@ -41,7 +42,11 @@ class Colaborador {
   }
 
   static arredondarValor(valor: number) {
-    return Math.round((valor + Number.EPSILON) * 100) / 100;
+    const centavos = Math.round((valor + Number.EPSILON) * 100);
+    if (!Number.isSafeInteger(centavos) || centavos < 0) {
+      throw new ErroDeNegocio("O valor calculado excede o limite numérico seguro. Reduza os valores informados.");
+    }
+    return centavos / 100;
   }
 }
 

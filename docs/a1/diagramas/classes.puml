@@ -1,0 +1,47 @@
+@startuml
+class Colaborador {
+  id: string
+  matricula: string
+  nome: string
+  salarioBase: number
+  tipo: TipoColaborador
+  criadoEm: string
+  atualizadoEm?: string
+  adicional: number
+  salarioFinal: number
+  calcularAdicional(): number
+  definirRemuneracao()
+  {static} arredondarValor(valor): number
+}
+class ColaboradorPadrao
+class ColaboradorComissionado {
+  valorVendas: number
+  percentualComissao: number
+  calcularAdicional(): number
+}
+class ColaboradorProducao {
+  quantidadeProduzida: number
+  valorPorUnidade: number
+  calcularAdicional(): number
+}
+class ColaboradorFactory {
+  {static} tiposSuportados
+  {static} criar(dados): Colaborador
+}
+class ColaboradorRepository {
+  databasePath: string
+  garantirBancoDeDados()
+  listar()
+  adicionar(colaborador)
+  substituir(matricula, colaborador)
+  excluir(matricula)
+  salvar(colaboradores)
+}
+Colaborador <|-- ColaboradorPadrao
+Colaborador <|-- ColaboradorComissionado
+Colaborador <|-- ColaboradorProducao
+ColaboradorFactory ..> ColaboradorPadrao : cria
+ColaboradorFactory ..> ColaboradorComissionado : cria
+ColaboradorFactory ..> ColaboradorProducao : cria
+ColaboradorRepository ..> Colaborador : persiste
+@enduml

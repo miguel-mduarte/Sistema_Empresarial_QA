@@ -1,0 +1,190 @@
+{
+  "executadoEm": "2026-10-06T19:36:09.676036-03:00",
+  "revisao": "1257880d04fe72a6b6ca974b50ef08aed727cd3b",
+  "verificacoes": [
+    {
+      "projeto": "gestao-qualidade",
+      "comando": [
+        "/usr/bin/python3",
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        "scripts/tests",
+        "-v"
+      ],
+      "exitCode": 0,
+      "log": "check-01.log"
+    },
+    {
+      "projeto": "backend",
+      "comando": [
+        "/home/felipe/.nvm/versions/node/v24.18.0/bin/npm",
+        "run",
+        "typecheck"
+      ],
+      "exitCode": 0,
+      "log": "check-02.log"
+    },
+    {
+      "projeto": "backend",
+      "comando": [
+        "/home/felipe/.nvm/versions/node/v24.18.0/bin/npm",
+        "run",
+        "lint"
+      ],
+      "exitCode": 0,
+      "log": "check-03.log"
+    },
+    {
+      "projeto": "backend",
+      "comando": [
+        "/home/felipe/.nvm/versions/node/v24.18.0/bin/npm",
+        "run",
+        "build"
+      ],
+      "exitCode": 0,
+      "log": "check-04.log"
+    },
+    {
+      "projeto": "frontend",
+      "comando": [
+        "/home/felipe/.nvm/versions/node/v24.18.0/bin/npm",
+        "run",
+        "typecheck"
+      ],
+      "exitCode": 0,
+      "log": "check-05.log"
+    },
+    {
+      "projeto": "frontend",
+      "comando": [
+        "/home/felipe/.nvm/versions/node/v24.18.0/bin/npm",
+        "run",
+        "lint"
+      ],
+      "exitCode": 0,
+      "log": "check-06.log"
+    },
+    {
+      "projeto": "frontend",
+      "comando": [
+        "/home/felipe/.nvm/versions/node/v24.18.0/bin/npm",
+        "run",
+        "build"
+      ],
+      "exitCode": 0,
+      "log": "check-07.log"
+    },
+    {
+      "projeto": "backend",
+      "comando": [
+        "/home/felipe/.nvm/versions/node/v24.18.0/bin/npm",
+        "run",
+        "test:coverage",
+        "--",
+        "--coverage.reportsDirectory=/tmp/folha-clara-a1-neg0mkg8/coverage",
+        "--reporter=default",
+        "--reporter=json",
+        "--outputFile=/tmp/folha-clara-a1-neg0mkg8/vitest.json"
+      ],
+      "exitCode": 0,
+      "log": "check-08.log"
+    }
+  ],
+  "rastreabilidade": {
+    "casos": 30,
+    "requisitos": 21,
+    "automatizados": 28,
+    "planejados": 2
+  },
+  "fontes": {
+    "backend/.env.example": "582acc822b3bfcc669e95b09c835bb7ce276e4310d0240082c278c4bd4f48999",
+    "backend/.gitignore": "76d8f84e97a658a1d195ff3a9fa667e0c2d9ec40430ec9551cb1e10a08283a52",
+    "backend/README.md": "54809eab55dd4879f0ecf97c6ae0e457f6dea7f65d5770eb67d0211d2407c731",
+    "backend/eslint.config.js": "cf6833506fb37785311bc49ea29700ddf9c414cb6750c2f92b2628982d485579",
+    "backend/nodemon.json": "0de4e8d7d16aa6edc028c03de44e9acc8c7b735b9acc9bae5f1f98cd94a5193c",
+    "backend/package-lock.json": "9531e409cb5164f3cdd6eaec5e76f50617f4e48d33ecd65b6b0ec425473e5b20",
+    "backend/package.json": "bb36b5131e2172cf6ce98b51f6363e374f8d6d3ce0988b78ce5b3eb3ed6c8816",
+    "backend/src/app.ts": "e80b6f4dbfd0f5bdd382b372dbccddba653a61a26ea0db2576ebe7b0a6427fd1",
+    "backend/src/controllers/colaboradorController.ts": "fcd3fb4229eaceedbeca0c7031d1a8dee8fb609cc4533d8959ac1e61065e12f6",
+    "backend/src/controllers/folhaPagamentoController.ts": "dbdcd643bef1c535ca5bdad6af9a540617629e8b5b722643fd550f6c012e4e16",
+    "backend/src/data/colaboradorContext.ts": "2d4ff8a1dfc8d451aafdad0d41b694f16ca078543a0fd816839a75f9e6ee7edd",
+    "backend/src/data/colaboradorParser.ts": "94091a9ead3571ea763d85c17882e3ceee2733198f138808d1e3a4e45a009117",
+    "backend/src/data/colaboradorRepository.ts": "2043ae11601052e07130196d6b3b8f62d40b9dc7d8fbff70f0645f67611d7015",
+    "backend/src/errors/erroDeNegocio.ts": "c799464339eaa5e0f82b46cba21986df0c315b2b54245723f2a89750ec76b532",
+    "backend/src/errors/errorHandler.ts": "0dde1c2f7395661758ac41b7fea6ef765f0235ae7361d487254f362cea2e8ba8",
+    "backend/src/middlewares/handleValidation.ts": "06195ba402c1db640ce36416b9d0dc5a1617e4c2888f256142d7848a59a836fa",
+    "backend/src/middlewares/normalizarColaborador.ts": "ea03aa522d707da7998edc22ab09dad89fc31f0ec7eb13682d846f40e4d7e052",
+    "backend/src/models/colaboradorComissionadoModel.ts": "053079d3cd3394e7a110468909654c8116c293113589f5c723a35e57a5ecc239",
+    "backend/src/models/colaboradorFactory.ts": "0670fd00e04e32cfecfed8534040db52103f3c4720833e1bda4c4acf0d356300",
+    "backend/src/models/colaboradorModel.ts": "6c8d26dd8e2e0446f5877879eda4e820f16a8f3297f7b67a937b7469793bad64",
+    "backend/src/models/colaboradorPadraoModel.ts": "1bf2456c95eb2b1eaf19426fde5f89777ea64843204e772a544891e267329f3e",
+    "backend/src/models/colaboradorProducaoModel.ts": "bceccf5704b2d84978ae097685fa7f4f3500b0b57648896b76079e5879972adc",
+    "backend/src/models/colaboradorTypes.ts": "29e5c127722df3e944d9b110848222df55f07e0685a37ef70d3ca4d566f9510d",
+    "backend/src/routes/colaboradorComissionadoRoutes.ts": "9dd73755e9101b3e81ebf877104b1a4da6c0520a2d06b02acac762912abd01b4",
+    "backend/src/routes/colaboradorPadraoRoutes.ts": "b908acacb14e42165be363c56ccb7957ada5bf775a8fcd93479cba457a8e8faa",
+    "backend/src/routes/colaboradorProducaoRoutes.ts": "0785d1df6f72bc41e92788c8b2eedf0a70750cf86a71b721210e759594796939",
+    "backend/src/routes/colaboradorRoutes.ts": "fb301c0a01abd8fa73103cae82167f2894458711ce340bde146f0cbd107c301d",
+    "backend/src/routes/folhaPagamentoRoutes.ts": "b6d0f27084ed5d605c315556e988972ef4b4958d9825be381e6d95be08fb2322",
+    "backend/src/services/colaboradorService.ts": "ebe553ca8dbf34b6703a1a58967aa0550a92bc6d5e531ea26f72812ae229fd43",
+    "backend/src/services/folhaPagamentoService.ts": "7d2cbcb238bee6f26feb8239814a61c2b8127a062c3e227dd48b8e59aa136b0d",
+    "backend/src/validations/categoriaValidation.ts": "2c3f23f0d1c01f225492d8bffb2efc587fe8d6b2d390b728fa4788c2c257e17b",
+    "backend/src/validations/colaboradorValidations.ts": "4fc2e40a2902036b170069f8af1b590a32465bd6d230fe887bf64bb976ae46d9",
+    "backend/test/coberturaInfraestrutura.test.ts": "0d6b3ff90c2d48dfafec750500e99f60712f563c55ee394bad4a7469628bfdaf",
+    "backend/test/colaboradoresApi.test.ts": "8311aa5fa19120d2a4f67476b069d75e023dbb067ceee4af79ec891790d37fbc",
+    "backend/test/relatorios.test.ts": "f1ba0b08c46164e7972ab18f5d121289d179b45632f3efb863b5d232abe4fee2",
+    "backend/test/requisitosFuncionais.test.ts": "57b5c7ed715a4d943aa539dcfa16b10eff4bd94502aea5aacb51a63486330130",
+    "backend/tsconfig.json": "92c9f32cbb3e3c5d7e831ccd489e18e8ad6ee1c521817c783ed2a61c5303de03",
+    "backend/tsconfig.test.json": "adc66a53eaa991b16fc1ff9af77862ff6d687d403c2506c8d3f78756f8b0fab3",
+    "backend/vitest.config.ts": "516ee4c4c9281394a6495a8afa406e2992fd07570739e9d8fdeb0f2addc1f03e",
+    "frontend/.gitignore": "a34350980bfe73c46b141d92911ff8e0655530cc1a92c0fd95fb0d067c39bfbd",
+    "frontend/README.md": "d63003cc6db8d6df98114a625fca269b47f4cdcecebcd56b749131626285994d",
+    "frontend/eslint.config.js": "99a302deed9bb60fc035c43560997568f7e156131b3f5020a193335cb9b47c00",
+    "frontend/index.html": "691c64e3c6052d49d5998b054888a7d58010eac71ed05f0be1c8b6b234e8e6bd",
+    "frontend/package-lock.json": "7d3d216c7e5cf2f8543adb1edb8b92a7f5e0945a2dc15be9fd6ddeec574ab58d",
+    "frontend/package.json": "bde10c8cf48b861ae80e7e178634327d7ec4a6709b66926f413c286832cf045c",
+    "frontend/src/App.tsx": "43a67fe2661aa3e3c9121f5c9478d0d591cf16b2e768d1b3efd4b944aef651ce",
+    "frontend/src/components/employees/CompensationFields.tsx": "9879668e3fda7e649e3deab89c60ec90f00921cb54a2e514be9073ce98d485ee",
+    "frontend/src/components/employees/EmployeeCompensationDetail.tsx": "3fb2962037ec6a0523b6aec920a27e8973e96f3a74beac5bf99a9c969ab9336e",
+    "frontend/src/components/employees/EmployeeFormFields.tsx": "1332e0825dd9ed2dec99c5eef7fe16b2ad4d58e69e8c3998284ee0031eaeb3c2",
+    "frontend/src/components/employees/EmployeeMaintenancePanel.tsx": "c6fc1c1e8eec49eeecd07f475da0d4bca93311bd052f74c02d57ad539918b648",
+    "frontend/src/components/employees/EmployeeTypeBadge.tsx": "3904ab6144be6aa8abc7aa015a49cc3f3389a59e5b3c37906f1339c80068ef52",
+    "frontend/src/components/employees/EmployeesList.tsx": "bc1690a66510466149262f1efd97cc9c71f948cf5fc77070ef78c5b41f195ca7",
+    "frontend/src/components/employees/EmployeesTable.tsx": "e70cce4af3fd016044c3e8218b1e741d53f1e395fd30da9280b1b218d5926657",
+    "frontend/src/components/layout/AppLayout.tsx": "ef05725a3d4fd6b78d11a727294a96b443342546d45ebdbd0ebce7c042850ab6",
+    "frontend/src/components/layout/Sidebar.tsx": "f1c7e77f5de67fb270226ebb538893617fcdb1e20469679e654875304d00be87",
+    "frontend/src/components/layout/Topbar.tsx": "dbbad9c073902343c6c715c9ca29f11187aa9567e343d78b1fff7ff39402a0e9",
+    "frontend/src/components/payroll/IndividualPayrollCard.tsx": "be125d5a9cd33ff19574a03df9c684107ee9fecb2252d4e253267e189cf582ad",
+    "frontend/src/components/payroll/PayrollCard.tsx": "d202ee6edb6bfa5b909f28770ceb786383bb623ecd274f8e3b9fdd156142b75a",
+    "frontend/src/components/payroll/PayrollCategorySummary.tsx": "f7f6e5d047d6dd1321b084839d162b0f5c5ff8e6c103037fc9776a09602dc3bd",
+    "frontend/src/components/payroll/PayrollFeedback.tsx": "c06c5dbea7480df23fb77abe30f0bd0b21c8f13ab4c33f1d73c99cc12fef1b84",
+    "frontend/src/components/payroll/PayrollPageHeader.tsx": "0ffc3957d421b8aa15e7420fb1257d31c7ccdfc9537d97e964077a0b271475ab",
+    "frontend/src/components/payroll/PayrollSummary.tsx": "a6007e3f7e62e29406198488ff2559c3a9bd838c6189bf0fa7248ba983676711",
+    "frontend/src/components/payroll/PayrollTable.tsx": "ac28ee5d80300663e5a723980530ee1f1dc83bc19ae5184c7721f431a0fc0cd4",
+    "frontend/src/components/ui/Icons.tsx": "5e319328fbb84e09c90e1d367b4f09175411100b630e5ca6de2c5e5739fe9416",
+    "frontend/src/components/ui/PagePlaceholder.tsx": "92b7c223372d24940ea9191bfdb48def7e465634c72500d70581056a2db75af2",
+    "frontend/src/data/tiposColaborador.ts": "129b9f4a6226fb384b8c7763b0a0fa9a57ed300d76fdaa7e049861663464e694",
+    "frontend/src/hooks/useColaboradores.ts": "c3f50eff09bf75c1060698e32fb0eb99516a8d7bd920a316dccf64bfb09ea530",
+    "frontend/src/hooks/useFolhaIndividual.ts": "b94894dad3b405f530abce205592eb4a272ed97ff5db171b5b2a6604b2242b67",
+    "frontend/src/hooks/useFolhaPagamento.ts": "65115737c437ee4edaf58c0785dcf15d80136c418101fa2885b25d30d2c4b9a6",
+    "frontend/src/main.tsx": "d803efe8e816218345efd3722dad23e65c6a712f363617f5dd1bfe25cf9fb6a0",
+    "frontend/src/pages/EmployeesPage.tsx": "2a34389d2e0a96538be3bf10457cb6cebe71097eac22d642ad2737399d8d31ab",
+    "frontend/src/pages/IndividualPayrollPage.tsx": "5fd5227086126892df3deda534ea2f2fb6dcbe1b75da59f8a34e7ca8c7d6830f",
+    "frontend/src/pages/OverviewPage.tsx": "42826c9544b05ac0f0aa88778a98bc963a72bf0c4d9cb3c5cd766fcc1095c1e1",
+    "frontend/src/pages/PayrollPage.tsx": "284f91670fcfb22749a3ba65a0672c6cb7e7e059653d70d2f34a3d92ed8e56f6",
+    "frontend/src/routes/AppRouter.tsx": "34f9e32993b9d296e8301d6fa1ffe1b7211036b3706bdd71a8e30db72f27df80",
+    "frontend/src/services/apiClient.ts": "85b28ee64ba97259aa3da1c0e49d1e50732f84a70807540bf0ce77ed69468572",
+    "frontend/src/services/colaboradoresApi.ts": "17d1619ea1a64f7fd18029c6fc9ee0ba96356a2bdce532abe5d5cb1e3b4166b0",
+    "frontend/src/services/folhaPagamentoApi.ts": "86b09e20a55482c271bf5b78633a9568896a314a51aeccddf76dc900777c5f23",
+    "frontend/src/styles.css": "74e377e2f2106e360583c71efb494fceba9070b3708530abc560e95431e07bd9",
+    "frontend/src/types/colaborador.ts": "7d042fdf8df4b4a346398c607ad485482f0cec48efc2a6b00ab51f5127eaaa61",
+    "frontend/src/utils/colaboradorForm.ts": "804bf852754ccf4f31eb894a4d3a218811374056c63f3bb770037f144a81176b",
+    "frontend/src/utils/formatters.ts": "d1c0c969cf35f6c591020eb3b0e4863e28af12622e6f749a2534003ee3777fd4",
+    "frontend/src/vite-env.d.ts": "a237827c788da3e7c5c9aade9a159b89c8025b8939981074bc1e91cba5c90863",
+    "frontend/tsconfig.app.json": "a810c616e08554433881442d12242aa3b0bc6f7087c0c23858952c2f6661e35b",
+    "frontend/tsconfig.json": "770b4140bbb581e2dfd9ea9946ffc9c75a1d86ba7d2db5f77c83e37cbdf9d808",
+    "frontend/tsconfig.node.json": "705d2640e543d77baee845c811aab35eadaee8160aac35dd4e62b73bfe446be0",
+    "frontend/vite.config.ts": "79ae9251919b2c1b0ab5410acb98f0c56f67270d6bc1e816f82caa40b068be78"
+  }
+}

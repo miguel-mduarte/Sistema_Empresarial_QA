@@ -1,0 +1,12 @@
+{
+  "name": "folha-clara-entrega",
+  "private": true,
+  "type": "module",
+  "engines": { "node": ">=22.13" },
+  "scripts": {
+    "a1:verificar": "node scripts/a1.mjs verificar",
+    "a1:entrega": "node scripts/a1.mjs entrega",
+    "a1:documentos": "node scripts/a1.mjs documentos",
+    "a1:test": "node scripts/a1.mjs test"
+  }
+}

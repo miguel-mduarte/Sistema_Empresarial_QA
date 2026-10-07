@@ -1,0 +1,13 @@
+test_documentacao_tem_requisitos_e_vinculos_com_codigo (test_a1.EntregaA1Tests) ... ok
+test_fontes_novas_incluidas_sem_segredos_ou_dados (test_a1.EntregaA1Tests) ... ok
+test_nao_confunde_ignorado_com_aprovado (test_a1.EntregaA1Tests) ... ok
+test_rejeita_caso_sem_passos (test_a1.EntregaA1Tests) ... ok
+test_rejeita_id_duplicado (test_a1.EntregaA1Tests) ... ok
+test_rejeita_menos_de_vinte_casos (test_a1.EntregaA1Tests) ... ok
+test_rejeita_relatorio_vazio_mesmo_com_success (test_a1.EntregaA1Tests) ... ok
+test_rejeita_requisito_sem_teste (test_a1.EntregaA1Tests) ... ok
+
+----------------------------------------------------------------------
+Ran 8 tests in 0.015s
+
+OK

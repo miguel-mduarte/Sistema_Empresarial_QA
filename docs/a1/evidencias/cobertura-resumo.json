@@ -1,0 +1,577 @@
+{
+  "escopo": "backend/src/**/*.ts; frontend não medido",
+  "global": {
+    "instrucoes": {
+      "cobertos": 273,
+      "total": 277,
+      "percentual": 98.55
+    },
+    "ramificacoes": {
+      "cobertos": 129,
+      "total": 133,
+      "percentual": 96.99
+    },
+    "funcoes": {
+      "cobertos": 71,
+      "total": 72,
+      "percentual": 98.61
+    },
+    "linhas": {
+      "cobertos": 256,
+      "total": 259,
+      "percentual": 98.84
+    }
+  },
+  "arquivos": {
+    "backend/src/app.ts": {
+      "instrucoes": {
+        "cobertos": 16,
+        "total": 17,
+        "percentual": 94.11
+      },
+      "ramificacoes": {
+        "cobertos": 9,
+        "total": 11,
+        "percentual": 81.81
+      },
+      "funcoes": {
+        "cobertos": 3,
+        "total": 3,
+        "percentual": 100.0
+      },
+      "linhas": {
+        "cobertos": 15,
+        "total": 16,
+        "percentual": 93.75
+      }
+    },
+    "backend/src/controllers/colaboradorController.ts": {
+      "instrucoes": {
+        "cobertos": 35,
+        "total": 35,
+        "percentual": 100.0
+      },
+      "ramificacoes": {
+        "cobertos": 10,
+        "total": 10,
+        "percentual": 100.0
+      },
+      "funcoes": {
+        "cobertos": 6,
+        "total": 6,
+        "percentual": 100.0
+      },
+      "linhas": {
+        "cobertos": 31,
+        "total": 31,
+        "percentual": 100.0
+      }
+    },
+    "backend/src/controllers/folhaPagamentoController.ts": {
+      "instrucoes": {
+        "cobertos": 5,
+        "total": 6,
+        "percentual": 83.33
+      },
+      "ramificacoes": {
+        "cobertos": 0,
+        "total": 0,
+        "percentual": 100
+      },
+      "funcoes": {
+        "cobertos": 2,
+        "total": 2,
+        "percentual": 100.0
+      },
+      "linhas": {
+        "cobertos": 5,
+        "total": 6,
+        "percentual": 83.33
+      }
+    },
+    "backend/src/data/colaboradorContext.ts": {
+      "instrucoes": {
+        "cobertos": 4,
+        "total": 4,
+        "percentual": 100.0
+      },
+      "ramificacoes": {
+        "cobertos": 2,
+        "total": 2,
+        "percentual": 100.0
+      },
+      "funcoes": {
+        "cobertos": 1,
+        "total": 1,
+        "percentual": 100.0
+      },
+      "linhas": {
+        "cobertos": 4,
+        "total": 4,
+        "percentual": 100.0
+      }
+    },
+    "backend/src/data/colaboradorParser.ts": {
+      "instrucoes": {
+        "cobertos": 23,
+        "total": 24,
+        "percentual": 95.83
+      },
+      "ramificacoes": {
+        "cobertos": 27,
+        "total": 28,
+        "percentual": 96.42
+      },
+      "funcoes": {
+        "cobertos": 5,
+        "total": 6,
+        "percentual": 83.33
+      },
+      "linhas": {
+        "cobertos": 23,
+        "total": 24,
+        "percentual": 95.83
+      }
+    },
+    "backend/src/data/colaboradorRepository.ts": {
+      "instrucoes": {
+        "cobertos": 39,
+        "total": 39,
+        "percentual": 100.0
+      },
+      "ramificacoes": {
+        "cobertos": 15,
+        "total": 15,
+        "percentual": 100.0
+      },
+      "funcoes": {
+        "cobertos": 10,
+        "total": 10,
+        "percentual": 100.0
+      },
+      "linhas": {
+        "cobertos": 37,
+        "total": 37,
+        "percentual": 100.0
+      }
+    },
+    "backend/src/errors/erroDeNegocio.ts": {
+      "instrucoes": {
+        "cobertos": 2,
+        "total": 2,
+        "percentual": 100.0
+      },
+      "ramificacoes": {
+        "cobertos": 1,
+        "total": 1,
+        "percentual": 100.0
+      },
+      "funcoes": {
+        "cobertos": 1,
+        "total": 1,
+        "percentual": 100.0
+      },
+      "linhas": {
+        "cobertos": 2,
+        "total": 2,
+        "percentual": 100.0
+      }
+    },
+    "backend/src/errors/errorHandler.ts": {
+      "instrucoes": {
+        "cobertos": 7,
+        "total": 8,
+        "percentual": 87.5
+      },
+      "ramificacoes": {
+        "cobertos": 9,
+        "total": 10,
+        "percentual": 90.0
+      },
+      "funcoes": {
+        "cobertos": 1,
+        "total": 1,
+        "percentual": 100.0
+      },
+      "linhas": {
+        "cobertos": 7,
+        "total": 7,
+        "percentual": 100.0
+      }
+    },
+    "backend/src/middlewares/handleValidation.ts": {
+      "instrucoes": {
+        "cobertos": 7,
+        "total": 7,
+        "percentual": 100.0
+      },
+      "ramificacoes": {
+        "cobertos": 4,
+        "total": 4,
+        "percentual": 100.0
+      },
+      "funcoes": {
+        "cobertos": 2,
+        "total": 2,
+        "percentual": 100.0
+      },
+      "linhas": {
+        "cobertos": 5,
+        "total": 5,
+        "percentual": 100.0
+      }
+    },
+    "backend/src/middlewares/normalizarColaborador.ts": {
+      "instrucoes": {
+        "cobertos": 11,
+        "total": 11,
+        "percentual": 100.0
+      },
+      "ramificacoes": {
+        "cobertos": 14,
+        "total": 14,
+        "percentual": 100.0
+      },
+      "funcoes": {
+        "cobertos": 1,
+        "total": 1,
+        "percentual": 100.0
+      },
+      "linhas": {
+        "cobertos": 10,
+        "total": 10,
+        "percentual": 100.0
+      }
+    },
+    "backend/src/models/colaboradorComissionadoModel.ts": {
+      "instrucoes": {
+        "cobertos": 5,
+        "total": 5,
+        "percentual": 100.0
+      },
+      "ramificacoes": {
+        "cobertos": 0,
+        "total": 0,
+        "percentual": 100
+      },
+      "funcoes": {
+        "cobertos": 2,
+        "total": 2,
+        "percentual": 100.0
+      },
+      "linhas": {
+        "cobertos": 5,
+        "total": 5,
+        "percentual": 100.0
+      }
+    },
+    "backend/src/models/colaboradorFactory.ts": {
+      "instrucoes": {
+        "cobertos": 5,
+        "total": 5,
+        "percentual": 100.0
+      },
+      "ramificacoes": {
+        "cobertos": 3,
+        "total": 3,
+        "percentual": 100.0
+      },
+      "funcoes": {
+        "cobertos": 2,
+        "total": 2,
+        "percentual": 100.0
+      },
+      "linhas": {
+        "cobertos": 5,
+        "total": 5,
+        "percentual": 100.0
+      }
+    },
+    "backend/src/models/colaboradorModel.ts": {
+      "instrucoes": {
+        "cobertos": 17,
+        "total": 17,
+        "percentual": 100.0
+      },
+      "ramificacoes": {
+        "cobertos": 10,
+        "total": 10,
+        "percentual": 100.0
+      },
+      "funcoes": {
+        "cobertos": 4,
+        "total": 4,
+        "percentual": 100.0
+      },
+      "linhas": {
+        "cobertos": 16,
+        "total": 16,
+        "percentual": 100.0
+      }
+    },
+    "backend/src/models/colaboradorPadraoModel.ts": {
+      "instrucoes": {
+        "cobertos": 2,
+        "total": 2,
+        "percentual": 100.0
+      },
+      "ramificacoes": {
+        "cobertos": 0,
+        "total": 0,
+        "percentual": 100
+      },
+      "funcoes": {
+        "cobertos": 1,
+        "total": 1,
+        "percentual": 100.0
+      },
+      "linhas": {
+        "cobertos": 2,
+        "total": 2,
+        "percentual": 100.0
+      }
+    },
+    "backend/src/models/colaboradorProducaoModel.ts": {
+      "instrucoes": {
+        "cobertos": 5,
+        "total": 5,
+        "percentual": 100.0
+      },
+      "ramificacoes": {
+        "cobertos": 0,
+        "total": 0,
+        "percentual": 100
+      },
+      "funcoes": {
+        "cobertos": 2,
+        "total": 2,
+        "percentual": 100.0
+      },
+      "linhas": {
+        "cobertos": 5,
+        "total": 5,
+        "percentual": 100.0
+      }
+    },
+    "backend/src/models/colaboradorTypes.ts": {
+      "instrucoes": {
+        "cobertos": 0,
+        "total": 0,
+        "percentual": 100
+      },
+      "ramificacoes": {
+        "cobertos": 0,
+        "total": 0,
+        "percentual": 100
+      },
+      "funcoes": {
+        "cobertos": 0,
+        "total": 0,
+        "percentual": 100
+      },
+      "linhas": {
+        "cobertos": 0,
+        "total": 0,
+        "percentual": 100
+      }
+    },
+    "backend/src/routes/colaboradorComissionadoRoutes.ts": {
+      "instrucoes": {
+        "cobertos": 7,
+        "total": 7,
+        "percentual": 100.0
+      },
+      "ramificacoes": {
+        "cobertos": 0,
+        "total": 0,
+        "percentual": 100
+      },
+      "funcoes": {
+        "cobertos": 0,
+        "total": 0,
+        "percentual": 100
+      },
+      "linhas": {
+        "cobertos": 7,
+        "total": 7,
+        "percentual": 100.0
+      }
+    },
+    "backend/src/routes/colaboradorPadraoRoutes.ts": {
+      "instrucoes": {
+        "cobertos": 7,
+        "total": 7,
+        "percentual": 100.0
+      },
+      "ramificacoes": {
+        "cobertos": 0,
+        "total": 0,
+        "percentual": 100
+      },
+      "funcoes": {
+        "cobertos": 0,
+        "total": 0,
+        "percentual": 100
+      },
+      "linhas": {
+        "cobertos": 7,
+        "total": 7,
+        "percentual": 100.0
+      }
+    },
+    "backend/src/routes/colaboradorProducaoRoutes.ts": {
+      "instrucoes": {
+        "cobertos": 7,
+        "total": 7,
+        "percentual": 100.0
+      },
+      "ramificacoes": {
+        "cobertos": 0,
+        "total": 0,
+        "percentual": 100
+      },
+      "funcoes": {
+        "cobertos": 0,
+        "total": 0,
+        "percentual": 100
+      },
+      "linhas": {
+        "cobertos": 7,
+        "total": 7,
+        "percentual": 100.0
+      }
+    },
+    "backend/src/routes/colaboradorRoutes.ts": {
+      "instrucoes": {
+        "cobertos": 6,
+        "total": 6,
+        "percentual": 100.0
+      },
+      "ramificacoes": {
+        "cobertos": 0,
+        "total": 0,
+        "percentual": 100
+      },
+      "funcoes": {
+        "cobertos": 0,
+        "total": 0,
+        "percentual": 100
+      },
+      "linhas": {
+        "cobertos": 6,
+        "total": 6,
+        "percentual": 100.0
+      }
+    },
+    "backend/src/routes/folhaPagamentoRoutes.ts": {
+      "instrucoes": {
+        "cobertos": 3,
+        "total": 3,
+        "percentual": 100.0
+      },
+      "ramificacoes": {
+        "cobertos": 0,
+        "total": 0,
+        "percentual": 100
+      },
+      "funcoes": {
+        "cobertos": 0,
+        "total": 0,
+        "percentual": 100
+      },
+      "linhas": {
+        "cobertos": 3,
+        "total": 3,
+        "percentual": 100.0
+      }
+    },
+    "backend/src/services/colaboradorService.ts": {
+      "instrucoes": {
+        "cobertos": 32,
+        "total": 32,
+        "percentual": 100.0
+      },
+      "ramificacoes": {
+        "cobertos": 14,
+        "total": 14,
+        "percentual": 100.0
+      },
+      "funcoes": {
+        "cobertos": 13,
+        "total": 13,
+        "percentual": 100.0
+      },
+      "linhas": {
+        "cobertos": 32,
+        "total": 32,
+        "percentual": 100.0
+      }
+    },
+    "backend/src/services/folhaPagamentoService.ts": {
+      "instrucoes": {
+        "cobertos": 14,
+        "total": 14,
+        "percentual": 100.0
+      },
+      "ramificacoes": {
+        "cobertos": 2,
+        "total": 2,
+        "percentual": 100.0
+      },
+      "funcoes": {
+        "cobertos": 7,
+        "total": 7,
+        "percentual": 100.0
+      },
+      "linhas": {
+        "cobertos": 11,
+        "total": 11,
+        "percentual": 100.0
+      }
+    },
+    "backend/src/validations/categoriaValidation.ts": {
+      "instrucoes": {
+        "cobertos": 3,
+        "total": 3,
+        "percentual": 100.0
+      },
+      "ramificacoes": {
+        "cobertos": 0,
+        "total": 0,
+        "percentual": 100
+      },
+      "funcoes": {
+        "cobertos": 2,
+        "total": 2,
+        "percentual": 100.0
+      },
+      "linhas": {
+        "cobertos": 3,
+        "total": 3,
+        "percentual": 100.0
+      }
+    },
+    "backend/src/validations/colaboradorValidations.ts": {
+      "instrucoes": {
+        "cobertos": 11,
+        "total": 11,
+        "percentual": 100.0
+      },
+      "ramificacoes": {
+        "cobertos": 9,
+        "total": 9,
+        "percentual": 100.0
+      },
+      "funcoes": {
+        "cobertos": 6,
+        "total": 6,
+        "percentual": 100.0
+      },
+      "linhas": {
+        "cobertos": 8,
+        "total": 8,
+        "percentual": 100.0
+      }
+    }
+  }
+}

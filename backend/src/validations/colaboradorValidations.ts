@@ -1,7 +1,9 @@
 import { body, param } from "express-validator";
 
-function numeroNaoNegativo(campo: string, nome: string) {
-  return body(campo)
+function numeroNaoNegativo(campo: string, nome: string, tipo?: string) {
+  const validation = body(campo);
+  if (tipo) validation.if(body("tipo").equals(tipo));
+  return validation
     .custom((valor: unknown) => (
       (typeof valor === "number" || typeof valor === "string")
       && String(valor).trim() !== ""
@@ -10,33 +12,25 @@ function numeroNaoNegativo(campo: string, nome: string) {
     ))
     .withMessage(`${nome} deve ser um número igual ou maior que zero.`)
     .bail()
-    .toFloat();
+    .isFloat({ min: 0 }).withMessage(`${nome} deve ser um número decimal válido.`)
+    .bail()
+    .customSanitizer((valor: unknown) => Number(valor));
 }
 
 export const colaboradorValidation = () => [
   body("matricula").isString().withMessage("A matrícula é obrigatória.").bail()
-    .trim().notEmpty().withMessage("A matrícula é obrigatória."),
+    .trim().notEmpty().withMessage("A matrícula é obrigatória.").bail()
+    .custom((valor: string) => valor !== "." && valor !== "..")
+    .withMessage("Use uma matrícula diferente de ponto ou dois pontos consecutivos."),
   body("nome").isString().withMessage("O nome é obrigatório.").bail()
     .trim().notEmpty().withMessage("O nome é obrigatório."),
   body("tipo").isIn(["Padrão", "Comissionado", "Produção"])
     .withMessage("O tipo de colaborador informado é inválido."),
   numeroNaoNegativo("salarioBase", "O salário base"),
-  body("valorVendas").if(body("tipo").equals("Comissionado"))
-    .custom((valor: unknown) => typeof valor === "string" || typeof valor === "number")
-    .withMessage("O valor das vendas é obrigatório.").bail()
-    .isFloat({ min: 0 }).withMessage("O valor das vendas deve ser igual ou maior que zero.").bail().toFloat(),
-  body("percentualComissao").if(body("tipo").equals("Comissionado"))
-    .custom((valor: unknown) => typeof valor === "string" || typeof valor === "number")
-    .withMessage("O percentual de comissão é obrigatório.").bail()
-    .isFloat({ min: 0 }).withMessage("O percentual de comissão deve ser igual ou maior que zero.").bail().toFloat(),
-  body("quantidadeProduzida").if(body("tipo").equals("Produção"))
-    .custom((valor: unknown) => typeof valor === "string" || typeof valor === "number")
-    .withMessage("A quantidade produzida é obrigatória.").bail()
-    .isFloat({ min: 0 }).withMessage("A quantidade produzida deve ser igual ou maior que zero.").bail().toFloat(),
-  body("valorPorUnidade").if(body("tipo").equals("Produção"))
-    .custom((valor: unknown) => typeof valor === "string" || typeof valor === "number")
-    .withMessage("O valor por unidade é obrigatório.").bail()
-    .isFloat({ min: 0 }).withMessage("O valor por unidade deve ser igual ou maior que zero.").bail().toFloat(),
+  numeroNaoNegativo("valorVendas", "O valor das vendas", "Comissionado"),
+  numeroNaoNegativo("percentualComissao", "O percentual de comissão", "Comissionado"),
+  numeroNaoNegativo("quantidadeProduzida", "A quantidade produzida", "Produção"),
+  numeroNaoNegativo("valorPorUnidade", "O valor por unidade", "Produção"),
 ];
 
 export const matriculaValidation = () => [

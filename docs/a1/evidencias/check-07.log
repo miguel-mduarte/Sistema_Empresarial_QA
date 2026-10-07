@@ -1,0 +1,14 @@
+
+> folha-clara@0.1.0 build
+> tsc -b && vite build
+
+vite v8.2.2 building client environment for production...
+transforming...
+✓ 56 modules transformed.
+rendering chunks...
+computing gzip size...
+dist/index.html                   0.53 kB │ gzip:  0.33 kB
+dist/assets/index-CJqU_LMg.css   19.00 kB │ gzip:  4.45 kB
+dist/assets/index-By_tW8Iy.js   260.19 kB │ gzip: 81.01 kB
+
+✓ built in 186ms

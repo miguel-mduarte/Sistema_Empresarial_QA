@@ -1,0 +1,32 @@
+@startuml
+actor Administrador as A
+participant "Interface + serviço HTTP" as UI
+participant "Rota + validação\n+ controller" as API
+participant "colaboradorService" as S
+participant "Fábrica + modelo" as M
+participant "Repository + JSON" as R
+A -> UI : informar e confirmar cadastro
+UI -> API : POST /api/colaboradores
+API -> API : validar e extrair campos permitidos
+alt entrada inválida
+  API --> UI : 400 + erros
+else entrada válida
+  API -> S : cadastrar(repository, dados)
+  S -> R : listar()
+  R --> S : registros
+  alt matrícula duplicada
+    S --> API : ErroDeNegocio(409)
+    API --> UI : 409 + mensagem
+  else matrícula livre
+    S -> M : criar(dados)
+    M -> M : calcular adicional e final
+    M --> S : colaborador calculado
+    S -> R : adicionar(colaborador)
+    R -> R : gravar temporário + rename
+    R --> S : colaborador
+    S --> API : colaborador
+    API --> UI : 201 + cadastro
+    UI --> A : sucesso e dados atualizados
+  end
+end
+@enduml
