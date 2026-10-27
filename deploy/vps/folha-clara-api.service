@@ -1,0 +1,13 @@
+[Unit]
+Description=Folha Clara API
+After=network.target
+[Service]
+WorkingDirectory=/home/felipe/apps/folha-clara/current
+Environment=NODE_ENV=production
+Environment=COLABORADORES_DB_PATH=/home/felipe/apps/folha-clara/data/colaboradores.json
+ExecStart=/usr/bin/node /home/felipe/apps/folha-clara/current/server.mjs
+Restart=on-failure
+RestartSec=5
+UMask=0077
+[Install]
+WantedBy=default.target

@@ -14,6 +14,37 @@ Os documentos editáveis estão em `docs/a1/`. O pacote reproduz a estrutura
 `Projeto_FolhaPagamento/` pedida no enunciado. A identificação nominal da equipe
 está em `docs/a1/IDENTIFICACAO.md`.
 
+## Entrega A3 - 01/12/2026
+
+Documentação atual: [checklist A3](docs/a3/README.md),
+[manual do usuário](docs/a3/03_Manual_Usuario.md),
+[manual técnico](docs/a3/04_Manual_Tecnico.md) e
+[termo de homologação assinado e aprovado pelo QA](docs/a3/05_Termo_Homologacao.md).
+
+Após instalar as dependências de backend e frontend com `npm ci`, execute na raiz:
+
+```sh
+npm run build
+npm start
+```
+
+A versão compilada abre em http://127.0.0.1:3000 com frontend e API juntos.
+`PORT`, `HOST` e `COLABORADORES_DB_PATH` são lidos do ambiente pelo servidor integrado.
+Não há deploy automático. Use um processo por arquivo JSON.
+
+```sh
+npm run banco -- demo dados-demo.json
+npm run banco -- backup dados-demo.json backups/demo.json
+npm run banco -- restore backups/demo.json dados-restaurados.json
+npm run a3:verificar
+npm run a3:documentos
+```
+
+As operações de banco recusam sobrescrever destinos existentes. O gerador A3
+requer Python com `scripts/requirements-a1.txt` e usa evidências salvas; não substitui
+a aceitação da impressão nem a assinatura do responsável. O limite técnico é de
+R$ 1 trilhão por valor monetário e folha, com arredondamento decimal half-up.
+
 ## Instalação e execução local
 
 Pré-requisito: Node.js >= 22.13 e npm. Use dois terminais, a partir da raiz:
@@ -116,4 +147,4 @@ dependências instaladas e builds ficam excluídos. Testes da preparação:
 Um processo backend escreve o JSON; não há suporte declarado a múltiplos
 escritores, autenticação, encargos trabalhistas, descontos, férias, 13º salário
 ou histórico por competência. Os valores representam a remuneração definida
-pelo documento do cliente. A A3 tem planejamento próprio e não está homologada.
+pelo documento do cliente. A A3 possui aceite aprovado pelo QA, conforme termo próprio.

@@ -1,5 +1,6 @@
 import ErroDeNegocio from "../errors/erroDeNegocio.js";
 import ColaboradorFactory from "../models/colaboradorFactory.js";
+import { somarMoeda } from "../models/valoresMonetarios.js";
 import type ColaboradorRepository from "../data/colaboradorRepository.js";
 import type { DadosColaborador, TipoColaborador } from "../models/colaboradorTypes.js";
 
@@ -25,6 +26,7 @@ export function cadastrarColaboradorService(repository: ColaboradorRepository, d
   }
 
   const colaborador = ColaboradorFactory.criar(dadosValidados);
+  somarMoeda([...listarColaboradoresService(repository).map((item) => item.salarioFinal), colaborador.salarioFinal]);
 
   return repository.adicionar(colaborador);
 }
@@ -73,6 +75,8 @@ export function alterarColaboradorService(repository: ColaboradorRepository, mat
     criadoEm: colaboradorAtual.criadoEm,
     atualizadoEm: new Date().toISOString(),
   });
+  somarMoeda(colaboradores.map((item, indice) => indice === indiceAtual
+    ? colaboradorAtualizado.salarioFinal : ColaboradorFactory.criar(item).salarioFinal));
 
   return repository.substituir(
     colaboradorAtual.matricula,

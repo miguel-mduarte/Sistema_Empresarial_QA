@@ -1,0 +1,15 @@
+
+> folha-clara@0.1.0 test
+> vitest run --reporter=default --reporter=json --outputFile=/home/felipe/dev/facul/sem6/gestao-qualidade/docs/a3/evidencias/frontend.json
+
+
+ RUN  v5.0.1 /home/felipe/dev/facul/sem6/gestao-qualidade/frontend
+
+ ✓ test/formulario.test.ts (11 tests) 7ms
+
+ Test Files  1 passed (1)
+      Tests  11 passed (11)
+   Start at  19:54:03
+   Duration  235ms (transform 44%, import 43%, tests 7%, worker 6%)
+
+JSON report written to /home/felipe/dev/facul/sem6/gestao-qualidade/docs/a3/evidencias/frontend.json

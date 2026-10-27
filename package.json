@@ -4,6 +4,11 @@
   "type": "module",
   "engines": { "node": ">=22.13" },
   "scripts": {
+    "build": "npm --prefix backend run build && npm --prefix frontend run build",
+    "start": "node scripts/servir_a3.mjs",
+    "banco": "node scripts/banco_a3.mjs",
+    "a3:verificar": "node scripts/verificar_a3.mjs",
+    "a3:documentos": "node scripts/a1.mjs a3",
     "a1:verificar": "node scripts/a1.mjs verificar",
     "a1:entrega": "node scripts/a1.mjs entrega",
     "a1:documentos": "node scripts/a1.mjs documentos",

@@ -1,0 +1,45 @@
+
+> backend@1.0.0 test:coverage
+> vitest run --coverage --reporter=default --reporter=json --outputFile=/home/felipe/dev/facul/sem6/gestao-qualidade/docs/a3/evidencias/backend.json
+
+
+ RUN  v5.0.1 /home/felipe/dev/facul/sem6/gestao-qualidade/backend
+      Coverage enabled with v8
+
+ ✓ test/valoresMonetarios.test.ts (17 tests) 349ms
+   ✓ Unidade RF006/RF008/RN008 - precisão decimal (17)
+     ✓ RF006 compara 10 mil comissões com referência inteira independente 313ms
+ ✓ test/precisaoApi.test.ts (2 tests) 382ms
+ ✓ test/coberturaInfraestrutura.test.ts (21 tests) 390ms
+ ✓ test/relatorios.test.ts (1 test) 499ms
+   ✓ relatórios individuais refletem cadastro, alteração, exclusão e total por categoria 495ms
+ ✓ test/requisitosFuncionais.test.ts (9 tests) 604ms
+ ✓ test/colaboradoresApi.test.ts (28 tests) 1309ms
+
+ Test Files  6 passed (6)
+      Tests  78 passed (78)
+   Start at  19:54:00
+   Duration  2.55s (tests 45%, import 35%, transform 17%, worker 3%)
+
+JSON report written to /home/felipe/dev/facul/sem6/gestao-qualidade/docs/a3/evidencias/backend.json
+ % Coverage report from v8
+-------------------|---------|----------|---------|---------|-------------------
+File               | % Stmts | % Branch | % Funcs | % Lines | Uncovered Line #s 
+-------------------|---------|----------|---------|---------|-------------------
+All files          |   98.65 |    97.22 |   98.76 |   98.91 |                   
+ src               |   94.11 |    81.81 |     100 |   93.75 |                   
+  app.ts           |   94.11 |    81.81 |     100 |   93.75 | 37                
+ src/controllers   |   97.56 |      100 |     100 |   97.29 |                   
+  ...Controller.ts |   83.33 |      100 |     100 |   83.33 | 17                
+ src/data          |    98.5 |    97.77 |   94.11 |   98.46 |                   
+  ...adorParser.ts |   95.83 |    96.42 |   83.33 |   95.83 | 31                
+ src/errors        |      90 |     90.9 |     100 |     100 |                   
+  errorHandler.ts  |    87.5 |       90 |     100 |     100 | 5                 
+-------------------|---------|----------|---------|---------|-------------------
+
+=============================== Coverage summary ===============================
+Statements   : 98.65% ( 293/297 )
+Branches     : 97.22% ( 140/144 )
+Functions    : 98.76% ( 80/81 )
+Lines        : 98.91% ( 273/276 )
+================================================================================

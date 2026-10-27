@@ -727,7 +727,7 @@ tbody tr:hover { background: #fbfcfc; }
 }
 .payroll-footer .status-dot { width: 6px; height: 6px; }
 
-@media (max-width: 800px) {
+@media screen and (max-width: 800px) {
   .sidebar { position: static; width: auto; padding: 20px; border-right: 0; border-bottom: 1px solid var(--line); }
   .sidebar nav { display: flex; gap: 6px; margin-top: 24px; overflow-x: auto; }
   nav > p, .sidebar-note { display: none; }
@@ -741,7 +741,7 @@ tbody tr:hover { background: #fbfcfc; }
   .employee-summary { position: static; }
 }
 
-@media (max-width: 620px) {
+@media screen and (max-width: 620px) {
   .page-heading { align-items: flex-start; flex-direction: column; gap: 22px; }
   .payroll-heading-actions { width: 100%; align-items: stretch; flex-direction: column; }
   .print-button { width: 100%; }
@@ -806,7 +806,7 @@ tbody tr:hover { background: #fbfcfc; }
   .delete-confirmation > p { padding-right: 20px; padding-left: 20px; }
 }
 
-@media (max-width: 410px) {
+@media screen and (max-width: 410px) {
   .payroll-header { align-items: flex-start; }
   .record-count { align-items: flex-end; flex-direction: column; gap: 0; }
   .record-count strong { font-size: 19px; }
@@ -824,13 +824,26 @@ tbody tr:hover { background: #fbfcfc; }
 .individual-payroll > p:last-child { margin-top: 24px; }
 
 @media print {
+  @page { size: A4 portrait; margin: 12mm; }
   .no-print { display: none !important; }
   :root { background: #fff; }
+  html, body, .app-shell, .page { min-width: 0; min-height: 0; width: 100%; }
   .sidebar, .topbar, .print-button, .payroll-source, .payroll-footer, .employees-list-footer, .requirement-chip { display: none; }
   .page { margin: 0; }
-  main { width: 100%; max-width: none; padding: 20px; }
+  main { width: 100%; max-width: none; padding: 0; }
   .page-heading { display: block; }
   h1 { font-size: 32px; letter-spacing: -1px; }
-  .payroll-card { margin-top: 28px; border-color: #cfd7d4; box-shadow: none; }
-  tbody tr { break-inside: avoid; }
+  .payroll-card { margin-top: 20px; border-color: #cfd7d4; box-shadow: none; overflow: visible; }
+  .table-wrapper { overflow: visible; width: 100%; }
+  table { table-layout: fixed; width: 100%; min-width: 0; }
+  thead { display: table-header-group; }
+  th, td { padding: 10px 6px; overflow-wrap: anywhere; white-space: normal; }
+  th { font-size: 8px; letter-spacing: .3px; }
+  td, .registration, .employee-name, .salary-value { font-size: 10px; }
+  .employee-type { padding: 0; min-height: 0; font-size: 9px; border-radius: 0; }
+  tbody tr, .payroll-header, .payroll-summary, .category-summary, .individual-fields > div { break-inside: avoid; }
+  .payroll-header, .payroll-summary, .category-summary, .individual-payroll { padding: 16px 12px; }
+  .category-grid, .individual-fields { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; }
+  .category-grid > *, .individual-fields > * { min-width: 0; overflow-wrap: anywhere; }
+  .category-grid dd, .individual-fields dd { font-size: 12px; }
 }

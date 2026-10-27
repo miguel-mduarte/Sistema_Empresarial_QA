@@ -1,0 +1,9 @@
+[Unit]
+Description=Folha Clara Web
+After=folha-clara-api.service
+[Service]
+ExecStart=/usr/sbin/nginx -c /home/felipe/apps/folha-clara/current/nginx.conf -g "daemon off;"
+Restart=on-failure
+RestartSec=5
+[Install]
+WantedBy=default.target

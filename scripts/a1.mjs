@@ -6,6 +6,7 @@ import { spawnSync } from 'node:child_process';
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const mode = process.argv[2];
 const commands = {
+  a3: ['scripts/gerar_entrega_a3.py'],
   verificar: ['scripts/preparar_a1.py', '--somente-verificar'],
   entrega: ['scripts/preparar_a1.py'],
   documentos: ['scripts/gerar_entrega_a1.py'],

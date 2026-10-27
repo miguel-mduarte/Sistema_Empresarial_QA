@@ -1,0 +1,157 @@
+{
+  "data": "2026-10-27",
+  "executor": "CT-A3-001 a 009: execução técnica em navegador; CT-A3-010: Felipe Vergara Chico (QA), validação manual registrada em 27/10/2026",
+  "ambiente": "Build local servido em 127.0.0.1:5187, JSON temporário isolado, desktop 1366x768 e móvel 390x844",
+  "casos": [
+    {
+      "id": "CT-A3-001",
+      "req": "RF001, RN002, RNF002",
+      "titulo": "Campos obrigatórios",
+      "pre": "Formulário vazio e banco de teste vazio",
+      "dados": "Matrícula, nome e salário vazios",
+      "passos": [
+        "Abrir Colaboradores",
+        "Clicar Salvar colaborador",
+        "Conferir mensagens e lista"
+      ],
+      "esperado": "Rejeitar envio e indicar os três campos",
+      "obtido": "Mensagens Informe a matrícula, Informe o nome do colaborador e Informe o salário base; nenhum cadastro criado",
+      "status": "Passou"
+    },
+    {
+      "id": "CT-A3-002",
+      "req": "RF001, RF002, RF005, RF006",
+      "titulo": "Cadastrar padrão",
+      "pre": "Formulário disponível",
+      "dados": "A3-P, Ana Exemplo, Padrão, base 1800",
+      "passos": [
+        "Preencher dados",
+        "Salvar",
+        "Conferir linha da tabela"
+      ],
+      "esperado": "Sucesso, adicional zero e final 1800",
+      "obtido": "Ana Exemplo cadastrada; linha A3-P com base 1800, adicional zero e final 1800",
+      "status": "Passou"
+    },
+    {
+      "id": "CT-A3-003",
+      "req": "RF003, RF006, RN008",
+      "titulo": "Comissão com arredondamento decimal",
+      "pre": "Cadastro padrão existente",
+      "dados": "A3-C, Bruno Exemplo, base 1000, vendas 4.27, percentual 50",
+      "passos": [
+        "Selecionar Comissionado",
+        "Preencher dados e salvar",
+        "Conferir adicional e final"
+      ],
+      "esperado": "Adicional 2.14 e final 1002.14",
+      "obtido": "Tabela mostrou vendas 4,27, percentual 50%, adicional 2,14 e final 1002,14",
+      "status": "Passou"
+    },
+    {
+      "id": "CT-A3-004",
+      "req": "RF004, RF006",
+      "titulo": "Cadastrar produção",
+      "pre": "Formulário disponível",
+      "dados": "A3-R, Carla Exemplo, base 1500, quantidade 80, unidade 12.5",
+      "passos": [
+        "Selecionar Produção",
+        "Preencher dados e salvar",
+        "Conferir remuneração"
+      ],
+      "esperado": "Adicional 1000 e final 2500",
+      "obtido": "Tabela mostrou 80 un., 12,50 por unidade, adicional 1000 e final 2500",
+      "status": "Passou"
+    },
+    {
+      "id": "CT-A3-005",
+      "req": "RF007, RF008",
+      "titulo": "Folha consolidada e categorias",
+      "pre": "A3-P, A3-C e A3-R cadastrados pelos casos anteriores",
+      "dados": "Salários 1800, 1002.14 e 2500",
+      "passos": [
+        "Abrir Folha de pagamento",
+        "Conferir três linhas",
+        "Conferir total e categorias"
+      ],
+      "esperado": "Três colaboradores, total 5302.14 e categorias reconciliadas",
+      "obtido": "Três linhas; total R$ 5.302,14; Padrão 1800, Comissionado 1002,14 e Produção 2500",
+      "status": "Passou"
+    },
+    {
+      "id": "CT-A3-006",
+      "req": "RF007",
+      "titulo": "Folha individual",
+      "pre": "A3-C na consolidada",
+      "dados": "Bruno Exemplo, A3-C",
+      "passos": [
+        "Clicar Ver folha individual na linha A3-C",
+        "Conferir nome, matrícula e valores",
+        "Verificar aviso de cadastro atual"
+      ],
+      "esperado": "Somente Bruno, base 1000, adicional 2.14, final 1002.14",
+      "obtido": "Página individual exibiu A3-C, Bruno Exemplo, Comissionado e os três valores esperados",
+      "status": "Passou"
+    },
+    {
+      "id": "CT-A3-007",
+      "req": "RF009, RNF003",
+      "titulo": "Alterar e recarregar",
+      "pre": "A3-P cadastrado com base 1800",
+      "dados": "Nova base 1900",
+      "passos": [
+        "Editar Ana Exemplo",
+        "Salvar alterações",
+        "Recarregar a página"
+      ],
+      "esperado": "Cadastro continua com base e final 1900",
+      "obtido": "Após recarregar, linha A3-P mostrou base 1900, adicional zero e final 1900",
+      "status": "Passou"
+    },
+    {
+      "id": "CT-A3-008",
+      "req": "RF009, RF008",
+      "titulo": "Excluir e atualizar folha",
+      "pre": "A3-R cadastrado, A3-P já alterado",
+      "dados": "Excluir Carla Exemplo",
+      "passos": [
+        "Clicar Excluir Carla Exemplo",
+        "Conferir matrícula na confirmação e confirmar",
+        "Abrir folha"
+      ],
+      "esperado": "A3-R removido; duas pessoas e total 2902.14",
+      "obtido": "Tabela ficou com A3-P e A3-C; folha com total R$ 2.902,14 e Produção zero",
+      "status": "Passou"
+    },
+    {
+      "id": "CT-A3-009",
+      "req": "RNF001, RF001, RF005, RF007",
+      "titulo": "Usabilidade em desktop e móvel",
+      "pre": "Sistema local em execução; viewport configurável",
+      "dados": "UX-01, Pessoa Teste, base 1500; primeiro envio sem nome",
+      "passos": [
+        "Em 390x844 enviar sem nome e conferir erro",
+        "Informar Pessoa Teste e salvar; consultar e abrir folha individual",
+        "Conferir folhas em 1366x768 e restaurar viewport"
+      ],
+      "esperado": "Erro compreensível, operação possível e relatórios legíveis nos dois tamanhos",
+      "obtido": "Nome vazio rejeitado com instrução; UX-01 salvo com final 1500; folhas legíveis em cartões no móvel e tabela no desktop, sem sobreposição observada. Avaliação exploratória, não ensaio formal de acessibilidade",
+      "status": "Passou"
+    },
+    {
+      "id": "CT-A3-010",
+      "req": "RF007, RNF001",
+      "titulo": "Impressão e salvamento em PDF",
+      "pre": "Navegador convencional com diálogo de impressão e registros fictícios",
+      "dados": "Folha individual A3-C e consolidada",
+      "passos": [
+        "Abrir folha e clicar Imprimir",
+        "Selecionar Salvar como PDF, A4 e conferir prévia",
+        "Salvar, abrir PDF e verificar valores, todas as colunas e paginação"
+      ],
+      "esperado": "PDF legível das duas folhas, sem cortes e com os mesmos valores da tela",
+      "obtido": "Após relato de corte de colunas (DEF-006), CSS corrigido e seis cenários automatizados A4 aprovados. Felipe Vergara Chico (QA) confirmou em 27/10/2026 a execução manual do teste das folhas individual e consolidada após a correção. Resultado aprovado por confirmação do responsável; nenhum novo PDF manual foi anexado. Data exata da execução e versão do navegador não informadas; data acima corresponde ao registro da confirmação.",
+      "status": "Passou"
+    }
+  ]
+}

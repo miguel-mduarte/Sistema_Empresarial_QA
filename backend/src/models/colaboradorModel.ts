@@ -1,13 +1,13 @@
 import { randomUUID } from "node:crypto";
-import ErroDeNegocio from "../errors/erroDeNegocio.js";
-import type { DadosColaborador, TipoColaborador } from "./colaboradorTypes.js";
+import { arredondarMoeda, somarMoeda } from "./valoresMonetarios.js";
+import type { DadosBase, TipoColaborador } from "./colaboradorTypes.js";
 
-class Colaborador {
+class Colaborador<Tipo extends string = TipoColaborador> {
   id: string;
   matricula: string;
   nome: string;
   salarioBase: number;
-  tipo: TipoColaborador;
+  tipo: Tipo;
   criadoEm: string;
   atualizadoEm?: string;
   adicional = 0;
@@ -20,11 +20,11 @@ class Colaborador {
     tipo,
     criadoEm,
     atualizadoEm,
-  }: DadosColaborador) {
+  }: DadosBase & { tipo: Tipo }) {
     this.id = id ?? randomUUID();
     this.matricula = matricula;
     this.nome = nome;
-    this.salarioBase = salarioBase;
+    this.salarioBase = arredondarMoeda(salarioBase);
     this.tipo = tipo;
     this.criadoEm = criadoEm ?? new Date().toISOString();
     if (atualizadoEm) this.atualizadoEm = atualizadoEm;
@@ -36,17 +36,11 @@ class Colaborador {
 
   definirRemuneracao() {
     this.adicional = Colaborador.arredondarValor(this.calcularAdicional());
-    this.salarioFinal = Colaborador.arredondarValor(
-      this.salarioBase + this.adicional,
-    );
+    this.salarioFinal = somarMoeda([this.salarioBase, this.adicional]);
   }
 
   static arredondarValor(valor: number) {
-    const centavos = Math.round((valor + Number.EPSILON) * 100);
-    if (!Number.isSafeInteger(centavos) || centavos < 0) {
-      throw new ErroDeNegocio("O valor calculado excede o limite numérico seguro. Reduza os valores informados.");
-    }
-    return centavos / 100;
+    return arredondarMoeda(valor);
   }
 }
 

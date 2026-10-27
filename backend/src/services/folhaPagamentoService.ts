@@ -2,6 +2,7 @@ import type ColaboradorRepository from "../data/colaboradorRepository.js";
 import { buscarColaboradorPorMatriculaService, listarColaboradoresService } from "./colaboradorService.js";
 import ErroDeNegocio from "../errors/erroDeNegocio.js";
 import ColaboradorFactory from "../models/colaboradorFactory.js";
+import { somarMoeda } from "../models/valoresMonetarios.js";
 
 function detalharColaborador(colaborador: ReturnType<typeof ColaboradorFactory.criar>) {
   return {
@@ -27,15 +28,15 @@ export function gerarFolhaPagamentoService(repository: ColaboradorRepository) {
     return {
       tipo,
       quantidadeColaboradores: registros.length,
-      total: registros.reduce((soma, item) => soma + Math.round(item.salarioFinal * 100), 0) / 100,
+      total: somarMoeda(registros.map((item) => item.salarioFinal)),
     };
   });
-  const total = itens.reduce((soma, colaborador) => soma + colaborador.salarioFinal, 0);
+  const total = somarMoeda(itens.map((colaborador) => colaborador.salarioFinal));
   return {
     itens,
     resumo: {
       quantidadeColaboradores: itens.length,
-      totalFolha: Math.round((total + Number.EPSILON) * 100) / 100,
+      totalFolha: total,
       totaisPorCategoria,
     },
   };

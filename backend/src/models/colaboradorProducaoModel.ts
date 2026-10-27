@@ -1,4 +1,5 @@
 import Colaborador from "./colaboradorModel.js";
+import { multiplicarMoeda } from "./valoresMonetarios.js";
 import type { DadosProducao } from "./colaboradorTypes.js";
 
 class ColaboradorProducao extends Colaborador {
@@ -13,7 +14,7 @@ class ColaboradorProducao extends Colaborador {
   }
 
   calcularAdicional() {
-    return this.quantidadeProduzida * this.valorPorUnidade;
+    return multiplicarMoeda(this.quantidadeProduzida, this.valorPorUnidade);
   }
 }
 

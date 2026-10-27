@@ -4,7 +4,7 @@ function validateNonNegativeNumber(value: string, emptyMessage: string, invalidM
 
   const number = Number(value);
   if (!Number.isFinite(number) || number < 0) return invalidMessage;
-  return number > Number.MAX_SAFE_INTEGER / 100
+  return number > 1_000_000_000_000
     ? "O valor excede o limite numérico seguro."
     : undefined;
 }
